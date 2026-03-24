@@ -15,10 +15,10 @@ async function testEmail() {
   console.log('Sending test email to shafeek@barcodegulf.net...');
   try {
     const info = await transporter.sendMail({
-      from: `"Test" <${process.env.EMAIL_FROM}>`,
+      from: `"BGS Help Desk Support" <${process.env.EMAIL_FROM}>`,
       to: 'shafeek@barcodegulf.net',
-      subject: 'OTP Test',
-      html: '<b>Your OTP is 123456</b>',
+      subject: 'OTP Integration Successful',
+      html: '<b>Your email integration for OTP is now working! The App Password was successfully applied.</b>',
     });
     console.log('Email sent:', info.messageId);
   } catch (err) {

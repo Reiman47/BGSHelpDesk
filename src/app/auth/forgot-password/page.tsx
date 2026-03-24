@@ -28,11 +28,24 @@ export default function ForgotPasswordPage() {
         method: "POST",
         body: JSON.stringify({ email }),
       });
-      if (!res.ok) throw new Error("Failed to send OTP");
+      
+      const data = await res.json().catch(() => ({}));
+      
+      if (!res.ok) {
+        if (res.status === 404) {
+          throw new Error("USER_NOT_FOUND");
+        }
+        throw new Error(data.message || "Failed to send OTP");
+      }
+      
       setStep("otp");
       setStatus("idle");
     } catch (err: any) {
-      setError(lang === 'ar' ? 'غير قادر على معالجة طلبك. يرجى المحاولة مرة أخرى لاحقاً.' : err.message);
+      if (err.message === "USER_NOT_FOUND") {
+        setError(t("userDoesNotExist"));
+      } else {
+        setError(err.message || (lang === 'ar' ? 'غير قادر على معالجة طلبك. يرجى المحاولة مرة أخرى لاحقاً.' : "Failed to send OTP"));
+      }
       setStatus("error");
     }
   };

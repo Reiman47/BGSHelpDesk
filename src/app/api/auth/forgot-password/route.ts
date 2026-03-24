@@ -25,8 +25,7 @@ export async function POST(req: Request) {
     });
 
     if (!user) {
-      // For security, don't reveal if user exists or not
-      return NextResponse.json({ message: "If an account exists, an OTP has been sent." }, { status: 200 });
+      return NextResponse.json({ message: "User does not exist, please register" }, { status: 404 });
     }
 
     // Generate 6-digit OTP
