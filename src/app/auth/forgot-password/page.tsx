@@ -52,7 +52,23 @@ export default function ForgotPasswordPage() {
 
   const handleOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStep("reset");
+    setStatus("loading");
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth/verify-otp", {
+        method: "POST",
+        body: JSON.stringify({ email, otp }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || "Invalid OTP");
+      
+      setStep("reset");
+      setStatus("idle");
+    } catch (err: any) {
+      setError(err.message || (lang === 'ar' ? 'رمز غير صالح.' : "Invalid OTP"));
+      setStatus("error");
+    }
   };
 
   const handleResetSubmit = async (e: React.FormEvent) => {
