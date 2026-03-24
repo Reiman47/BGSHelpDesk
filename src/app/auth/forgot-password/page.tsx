@@ -164,17 +164,19 @@ export default function ForgotPasswordPage() {
                 <h2 className="text-xl font-bold text-[#333333]">{t("enterOtp")}</h2>
                 <p className="text-sm text-gray-500 leading-relaxed">{t("otpInstructions")}</p>
               </div>
+              {error && <div className="p-4 bg-red-50 text-red-700 text-sm border-l-4 border-red-500">{error}</div>}
               <div>
                 <label className={`block text-sm font-bold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>{t("enterOtp")}</label>
                 <input 
-                  type="text" required value={otp} onChange={(e) => setOtp(e.target.value)}
-                  className={`w-full p-3.5 border border-gray-300 rounded-md outline-none focus:ring-1 focus:ring-[#1AA1C5] text-sm tracking-[10px] text-center font-bold`}
+                  type="text" required value={otp} onChange={(e) => { setOtp(e.target.value); setError(""); }}
+                  className={`w-full p-3.5 border ${error ? 'border-red-400' : 'border-gray-300'} rounded-md outline-none focus:ring-1 focus:ring-[#1AA1C5] text-sm tracking-[10px] text-center font-bold`}
                   maxLength={6}
+                  placeholder="______"
                 />
               </div>
               <div className={`flex gap-4 pt-6 mt-10 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                <button type="button" onClick={() => setStep("email")} className="px-10 py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px]">{t("back")}</button>
-                <button type="submit" className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[160px] flex items-center justify-center shadow-lg">{t("next")}</button>
+                <button type="button" onClick={() => { setStep("email"); setError(""); setOtp(""); }} className="px-10 py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px]">{t("back")}</button>
+                <button type="submit" disabled={status === "loading"} className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[160px] flex items-center justify-center shadow-lg disabled:opacity-60">{status === "loading" ? <Loader2 className="animate-spin mr-2" size={16} /> : t("next")}</button>
               </div>
             </form>
           ) : (
