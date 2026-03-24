@@ -138,7 +138,14 @@ export const translations: any = {
     terms: "Terms",
     allRightsReserved: "© 2026 Barcode Gulf Solutions. All rights reserved.",
     mgmtConsole: "Management Console",
-    needsAction: "Needs Action"
+    needsAction: "Needs Action",
+    enterOtp: "Enter OTP",
+    otpInstructions: "Please enter the 6-digit code sent to your email.",
+    enterNewPass: "Enter New Password",
+    verifyOtp: "Verify OTP",
+    resetSuccess: "Password reset successfully!",
+    newPassword: "New Password*",
+    confirmNewPassword: "Confirm New Password*"
   },
   ar: {
     welcome: "مرحباً بعودتك",
@@ -279,6 +286,13 @@ export const translations: any = {
     terms: "الشروط والأحكام",
     allRightsReserved: "© 2026 باركود جلف سوليوشنز. جميع الحقوق محفوظة.",
     mgmtConsole: "لوحة التحكم الإدارية",
-    needsAction: "تحتاج لإجراء"
+    needsAction: "تحتاج لإجراء",
+    enterOtp: "أدخل رمز التحقق",
+    otpInstructions: "يرجى إدخال رمز التحقق المكون من 6 أرقام المرسل إلى بريدك الإلكتروني.",
+    enterNewPass: "أدخل كلمة المرور الجديدة",
+    verifyOtp: "تحقق من الرمز",
+    resetSuccess: "تم إعادة تعيين كلمة المرور بنجاح!",
+    newPassword: "كلمة المرور الجديدة*",
+    confirmNewPassword: "تأكيد كلمة المرور الجديدة*"
   }
 };

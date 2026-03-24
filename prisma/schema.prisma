@@ -22,6 +22,8 @@ model User {
   companyName   String?
   address       String?
   contactNumber String?
+  resetOtp      String?
+  resetOtpExpiry DateTime?
 
   tickets       Ticket[]  @relation("CreatedTickets")
   assignedTickets Ticket[] @relation("AssignedTickets")
