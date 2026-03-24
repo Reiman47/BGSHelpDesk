@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  plainPassword String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Additional Info
+  companyName   String?
+  address       String?
+  contactNumber String?
+
+  tickets       Ticket[]  @relation("CreatedTickets")
+  assignedTickets Ticket[] @relation("AssignedTickets")
+  replies       Reply[]
+  ticketLogs    TicketLog[]
+}
+
+model Ticket {
+  id          String   @id @default(cuid())
+  subject     String
+  description String
+  category    String
+  priority    Priority @default(MEDIUM)
+  status      Status   @default(OPEN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Hardware Info
+  partNumber  String?
+  serialNumber String?
+
+  createdBy   User     @relation("CreatedTickets", fields: [creatorId], references: [id], onDelete: Cascade)
+  creatorId   String
+  
+  assignedTo  User?    @relation("AssignedTickets", fields: [assignedId], references: [id], onDelete: SetNull)
+  assignedId  String?
+  
+  replies     Reply[]
+  logs        TicketLog[]
+}
+
+model Reply {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId  String
+  
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPERADMIN
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum Status {
+  OPEN
+  PENDING
+  CLOSED
+  RESOLVED
+}
+
+model TicketLog {
+  id        String   @id @default(cuid())
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId  String
+  
+  oldStatus Status?
+  newStatus Status
+  
+  updatedBy User     @relation(fields: [adminId], references: [id])
+  adminId   String
+  
+  createdAt DateTime @default(now())
+}

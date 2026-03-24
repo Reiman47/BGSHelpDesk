@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-bgs-teal text-white px-6 py-2.5 rounded-md font-semibold transition-all duration-300 hover:bg-[#1589a8] hover:shadow-lg active:scale-95 disabled:opacity-50;
+  }
+  
+  .btn-secondary {
+    @apply bg-bgs-navy text-white px-6 py-2.5 rounded-md font-semibold transition-all duration-300 hover:bg-[#152a4a] hover:shadow-lg active:scale-95 disabled:opacity-50;
+  }
+
+  .btn-outline {
+    @apply border-2 border-bgs-teal text-bgs-teal px-6 py-2.5 rounded-md font-semibold transition-all duration-300 hover:bg-bgs-teal hover:text-white active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-lg border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bgs-teal focus:border-transparent transition-all;
+  }
+
+  .nav-link {
+    @apply text-sm font-bold uppercase tracking-wider text-gray-700 hover:text-bgs-teal transition-colors duration-200 py-2;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1AA1C5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0B568D;
+}
