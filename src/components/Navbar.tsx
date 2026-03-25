@@ -167,7 +167,12 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          {!session && (
+          {session ? (
+            <div className={`flex flex-col pt-4 pb-2 border-b border-[#444444] ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+              <span className="text-white text-sm font-bold truncate">{session.user?.name ?? '—'}</span>
+              <span className="text-gray-400 text-xs truncate">{session.user?.email ?? ''}</span>
+            </div>
+          ) : (
             <div className="flex flex-col space-y-4 pt-4">
               <Link 
                 href="/auth/login" 
