@@ -1,21 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { 
-  LayoutDashboard, 
-  LogOut, 
   Menu, 
   X, 
-  ShieldCheck, 
   Facebook, 
   Linkedin, 
   Instagram, 
-  Twitter, 
   Phone, 
   Mail, 
-  ChevronDown 
 } from "lucide-react";
 import Image from "next/image";
 
@@ -136,26 +131,7 @@ export default function Navbar() {
               </div>
             )}
 
-            {session ? (
-              <div className={`flex items-center border-[#444444] ${lang === 'ar' ? 'border-r pr-6 space-x-reverse space-x-3' : 'border-l pl-6 space-x-3'}`}>
-                <Link 
-                  href={["ADMIN", "SUPERADMIN"].includes(session.user.role) ? '/admin' : '/dashboard'} 
-                  className={`bg-bgs-navy text-white px-4 py-1.5 rounded-md hover:bg-bgs-teal transition-all text-[11px] font-bold uppercase tracking-wider flex items-center shadow-lg ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
-                >
-                   {["ADMIN", "SUPERADMIN"].includes(session.user.role) 
-                     ? <ShieldCheck size={14} className={lang === 'ar' ? 'ml-2' : 'mr-2'} /> 
-                     : <LayoutDashboard size={14} className={lang === 'ar' ? 'ml-2' : 'mr-2'} />}
-                   <span>{t("portal")}</span>
-                </Link>
-                <button
-                  onClick={() => signOut({ callbackUrl: "/auth/login" })}
-                  className="text-gray-400 hover:text-white transition-colors p-1"
-                  title={t("logout")}
-                >
-                   <LogOut size={18} />
-                </button>
-              </div>
-            ) : (
+            {!session && (
               <div className={`flex items-center border-[#444444] ${lang === 'ar' ? 'border-r pr-6 space-x-reverse space-x-3' : 'border-l pl-6 space-x-3'}`}>
                 <Link 
                   href="/auth/login" 
@@ -196,23 +172,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          {session ? (
-            <div className="flex flex-col space-y-4 pt-4">
-              <Link 
-                href={["ADMIN", "SUPERADMIN"].includes(session.user.role) ? '/admin' : '/dashboard'} 
-                className="bg-bgs-teal text-white text-center py-3 rounded font-bold uppercase tracking-wider"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {lang === 'ar' ? "الذهاب إلى البوابة" : "Go to Portal"}
-              </Link>
-              <button
-                onClick={() => { signOut({ callbackUrl: "/auth/login" }); setIsMobileMenuOpen(false); }}
-                className="border border-gray-600 text-white text-center py-3 rounded font-bold uppercase tracking-wider"
-              >
-                {lang === 'ar' ? "تسجيل خروج" : "Logout"}
-              </button>
-            </div>
-          ) : (
+          {!session && (
             <div className="flex flex-col space-y-4 pt-4">
               <Link 
                 href="/auth/login" 
