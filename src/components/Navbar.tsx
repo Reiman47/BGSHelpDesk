@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { 
   Menu, 
   X, 
+  LogOut,
   Facebook, 
   Linkedin, 
   Instagram, 
@@ -109,9 +110,18 @@ export default function Navbar() {
             </div>
 
             {session ? (
-              <div className={`flex flex-col leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                <span className="text-white text-[11px] font-bold truncate max-w-[130px]">{session.user?.name ?? '—'}</span>
-                <span className="text-gray-400 text-[10px] truncate max-w-[130px]">{session.user?.email ?? ''}</span>
+              <div className={`flex items-center space-x-4 ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                <div className={`flex flex-col leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  <span className="text-white text-[11px] font-bold truncate max-w-[130px]">{session.user?.name ?? '—'}</span>
+                  <span className="text-gray-400 text-[10px] truncate max-w-[130px]">{session.user?.email ?? ''}</span>
+                </div>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/auth/login" })}
+                  className="text-gray-400 hover:text-white transition-colors p-1 border-l border-[#444444] pl-4"
+                  title={t("logout")}
+                >
+                   <LogOut size={18} />
+                </button>
               </div>
             ) : (
               <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
@@ -168,9 +178,19 @@ export default function Navbar() {
             </Link>
           ))}
           {session ? (
-            <div className={`flex flex-col pt-4 pb-2 border-b border-[#444444] ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-              <span className="text-white text-sm font-bold truncate">{session.user?.name ?? '—'}</span>
-              <span className="text-gray-400 text-xs truncate">{session.user?.email ?? ''}</span>
+            <div className={`flex flex-col pt-4 pb-4 border-b border-[#444444] ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex flex-col">
+                  <span className="text-white text-sm font-bold truncate">{session.user?.name ?? '—'}</span>
+                  <span className="text-gray-400 text-xs truncate">{session.user?.email ?? ''}</span>
+                </div>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/auth/login" })}
+                  className="text-gray-400 hover:text-white p-2 border border-[#444444] rounded"
+                >
+                  <LogOut size={20} />
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col space-y-4 pt-4">
