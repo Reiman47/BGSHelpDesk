@@ -23,8 +23,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     if (ticket && (userRole === "ADMIN" || userRole === "SUPERADMIN")) {
       const updateData: any = {};
       
-      // Auto-assign if currently unassigned
-      if (!ticket.assignedId) {
+      // Auto-assign if currently unassigned AND the user is a standard ADMIN
+      if (!ticket.assignedId && userRole === "ADMIN") {
         updateData.assignedId = userId;
       }
 
