@@ -109,14 +109,9 @@ export default function Navbar() {
             </div>
 
             {session ? (
-              <div className={`flex items-center space-x-2 ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                <div className="w-8 h-8 rounded-full bg-bgs-teal flex items-center justify-center text-white text-[11px] font-bold uppercase flex-shrink-0">
-                  {session.user?.name ? session.user.name.charAt(0) : session.user?.email?.charAt(0) ?? '?'}
-                </div>
-                <div className={`flex flex-col leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  <span className="text-white text-[11px] font-bold truncate max-w-[130px]">{session.user?.name ?? '—'}</span>
-                  <span className="text-gray-400 text-[10px] truncate max-w-[130px]">{session.user?.email ?? ''}</span>
-                </div>
+              <div className={`flex flex-col leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                <span className="text-white text-[11px] font-bold truncate max-w-[130px]">{session.user?.name ?? '—'}</span>
+                <span className="text-gray-400 text-[10px] truncate max-w-[130px]">{session.user?.email ?? ''}</span>
               </div>
             ) : (
               <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
