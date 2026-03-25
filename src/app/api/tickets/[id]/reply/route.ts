@@ -51,6 +51,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         ticket: {
           include: {
             createdBy: { select: { email: true, name: true } },
+            assignedTo: { select: { email: true, name: true } },
           }
         }
       }
@@ -75,9 +76,11 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         `
       );
     } else {
-      // Notify admins (Specific Admin: Shafeek)
+      // Notify only the assigned admin if exists
+      const recipientEmail = reply.ticket.assignedTo?.email || "shafeek@barcodegulf.net";
+      
       await sendTicketEmail(
-        "shafeek@barcodegulf.net",
+        recipientEmail,
         "Activity Notice: Customer Reply",
         `
           <h2 style="color: #1B365D; margin-top: 0;">New Response from Customer</h2>
