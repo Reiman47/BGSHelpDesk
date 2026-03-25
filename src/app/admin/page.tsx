@@ -30,16 +30,27 @@ export default async function AdminDashboardPage() {
 
   const isSuperAdmin = session.user?.role === "SUPERADMIN";
 
+  const whereClause = isSuperAdmin ? {} : {
+    OR: [
+      { assignedId: session.user.id },
+      { assignedId: null }
+    ]
+  };
+
   const allTickets = await prisma.ticket.findMany({
-    include: { createdBy: { select: { name: true, email: true, companyName: true } } },
+    where: whereClause,
+    include: { 
+      createdBy: { select: { name: true, email: true, companyName: true } },
+      assignedTo: { select: { name: true, email: true } }
+    },
     orderBy: { createdAt: "desc" },
   });
 
   const stats = {
-    total: await prisma.ticket.count(),
-    open: await prisma.ticket.count({ where: { status: "OPEN" } }),
-    pending: await prisma.ticket.count({ where: { status: "PENDING" } }),
-    resolved: await prisma.ticket.count({ where: { status: "RESOLVED" } }),
+    total: await prisma.ticket.count({ where: whereClause }),
+    open: await prisma.ticket.count({ where: { ...whereClause, status: "OPEN" } }),
+    pending: await prisma.ticket.count({ where: { ...whereClause, status: "PENDING" } }),
+    resolved: await prisma.ticket.count({ where: { ...whereClause, status: "RESOLVED" } }),
     users: await prisma.user.count({ where: { role: "USER" } }),
   };
 

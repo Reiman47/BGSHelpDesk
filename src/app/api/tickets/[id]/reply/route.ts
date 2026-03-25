@@ -14,6 +14,33 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     const userId = (session.user as any).id;
     const userRole = (session.user as any).role;
 
+    // Check if the ticket is unassigned and if the current user is an admin
+    const ticket = await prisma.ticket.findUnique({
+      where: { id },
+      select: { assignedId: true, status: true }
+    });
+
+    if (ticket && (userRole === "ADMIN" || userRole === "SUPERADMIN")) {
+      const updateData: any = {};
+      
+      // Auto-assign if currently unassigned
+      if (!ticket.assignedId) {
+        updateData.assignedId = userId;
+      }
+
+      // Automatically move from OPEN to PENDING on admin reply
+      if (ticket.status === "OPEN") {
+        updateData.status = "PENDING";
+      }
+
+      if (Object.keys(updateData).length > 0) {
+        await prisma.ticket.update({
+          where: { id },
+          data: updateData
+        });
+      }
+    }
+
     const reply = await prisma.reply.create({
       data: {
         content,
@@ -30,7 +57,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     });
 
     // Notify logic
-    if (userRole === "ADMIN") {
+    if (userRole === "ADMIN" || userRole === "SUPERADMIN") {
       // Notify user that admin replied
       await sendTicketEmail(
         reply.ticket.createdBy.email,

@@ -133,7 +133,11 @@ export default function TicketDetailContent({ ticket, isAdmin, isSuperAdmin }: T
                 </li>
                 {isAdmin && (
                   <li className="pt-4 border-t border-gray-100">
-                    <TicketAssignment ticketId={ticket.id} currentAssigneeId={ticket.assignedId} />
+                    <TicketAssignment 
+                      ticketId={ticket.id} 
+                      currentAssigneeId={ticket.assignedId} 
+                      isSuperAdmin={isSuperAdmin}
+                    />
                   </li>
                 )}
               </ul>

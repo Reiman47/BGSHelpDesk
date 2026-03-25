@@ -34,6 +34,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
   const [priorityFilter, setPriorityFilter] = useState("ALL");
   const [categoryFilter, setCategoryFilter] = useState("ALL");
   const [companyFilter, setCompanyFilter] = useState("ALL");
+  const [assigneeFilter, setAssigneeFilter] = useState("ALL");
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   // Get unique companies and categories for filter dropdowns
@@ -45,6 +46,16 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
   const categories = useMemo(() => {
     const list = new Set(tickets.map(t => t.category).filter(Boolean));
     return Array.from(list).sort() as string[];
+  }, [tickets]);
+
+  const assignees = useMemo(() => {
+    const list = new Map();
+    tickets.forEach(t => {
+      if (t.assignedTo) {
+        list.set(t.assignedId, t.assignedTo.name);
+      }
+    });
+    return Array.from(list.entries()).map(([id, name]) => ({ id, name }));
   }, [tickets]);
 
   const filteredTickets = useMemo(() => {
@@ -59,8 +70,10 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
         const matchesPriority = priorityFilter === "ALL" || t.priority === priorityFilter;
         const matchesCategory = categoryFilter === "ALL" || t.category === categoryFilter;
         const matchesCompany = companyFilter === "ALL" || t.createdBy.companyName === companyFilter;
+        const matchesAssignee = assigneeFilter === "ALL" || 
+          (assigneeFilter === "UNASSIGNED" ? !t.assignedId : t.assignedId === assigneeFilter);
 
-        return matchesSearch && matchesStatus && matchesPriority && matchesCategory && matchesCompany;
+        return matchesSearch && matchesStatus && matchesPriority && matchesCategory && matchesCompany && matchesAssignee;
       })
       .sort((a: any, b: any) => {
         const dateA = new Date(a.createdAt).getTime();
@@ -75,6 +88,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
     setPriorityFilter("ALL");
     setCategoryFilter("ALL");
     setCompanyFilter("ALL");
+    setAssigneeFilter("ALL");
     setSortOrder("newest");
   };
 
@@ -188,6 +202,24 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
             </select>
           </div>
 
+          {/* Assignee Filter */}
+          <div className="space-y-1.5">
+            <label className={`flex items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest ${lang === 'ar' ? 'flex-row-reverse mr-1' : 'ml-1'}`}>
+              <User size={10} className={lang === 'ar' ? 'ml-1' : 'mr-1'} /> {t("assignedTo")}
+            </label>
+            <select 
+              value={assigneeFilter}
+              onChange={(e) => setAssigneeFilter(e.target.value)}
+              className={`w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs font-medium focus:ring-2 focus:ring-bgs-teal outline-none ${lang === 'ar' ? 'text-right' : ''}`}
+            >
+              <option value="ALL">{t("all")}</option>
+              <option value="UNASSIGNED">{t("unassigned")}</option>
+              {assignees.map(a => (
+                <option key={a.id} value={a.id}>{a.name}</option>
+              ))}
+            </select>
+          </div>
+
           {/* Date Sort */}
           <div className="space-y-1.5">
             <label className={`flex items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest ${lang === 'ar' ? 'flex-row-reverse mr-1' : 'ml-1'}`}>
@@ -220,6 +252,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
               <tr className="bg-gray-50 text-[10px] font-bold uppercase text-gray-400 tracking-[0.15em] border-b">
                 <th className="px-6 py-4">{t("status")}</th>
                 <th className="px-6 py-4">{t("requester")}</th>
+                <th className="px-6 py-4">{t("assignedTo")}</th>
                 <th className="px-6 py-4">{t("ticketDetails")}</th>
                 <th className="px-6 py-4">{t("priority")}</th>
                 <th className="px-6 py-4">{t("created")}</th>
@@ -251,6 +284,18 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
                         </div>
                       </div>
                     </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    {ticket.assignedTo ? (
+                      <div className={`flex items-center ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : 'space-x-2'}`}>
+                        <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-[8px] font-bold uppercase">
+                          {ticket.assignedTo.name.charAt(0)}
+                        </div>
+                        <span className="text-xs font-semibold text-gray-700">{ticket.assignedTo.name}</span>
+                      </div>
+                    ) : (
+                      <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest italic">{t("unassigned")}</span>
+                    )}
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm font-bold text-bgs-navy line-clamp-1">{ticket.subject}</div>

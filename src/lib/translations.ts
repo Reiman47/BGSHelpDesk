@@ -149,7 +149,8 @@ export const translations: any = {
     userDoesNotExist: "User does not exist, please register",
     sendOtp: "Send Verification Code",
     emailAlreadyExists: "Email already exists. Please login.",
-    otpVerified: "OTP Verified Successfully"
+    otpVerified: "OTP Verified Successfully",
+    all: "All"
   },
   ar: {
     welcome: "مرحباً بعودتك",
@@ -301,6 +302,7 @@ export const translations: any = {
     userDoesNotExist: "هذا المستخدم غير موجود، يرجى التسجيل أولاً.",
     sendOtp: "إرسال رمز التحقق",
     emailAlreadyExists: "البريد الإلكتروني موجود بالفعل. يرجى تسجيل الدخول.",
-    otpVerified: "تم التحقق من الرمز بنجاح"
+    otpVerified: "تم التحقق من الرمز بنجاح",
+    all: "الكل"
   }
 };
