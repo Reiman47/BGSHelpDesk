@@ -298,7 +298,11 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
                     )}
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm font-bold text-bgs-navy line-clamp-1">{ticket.subject}</div>
+                    <Link href={`/dashboard/tickets/${ticket.id}`} className="block group">
+                      <div className="text-sm font-bold text-bgs-navy line-clamp-1 group-hover:text-bgs-teal transition-colors underline-offset-2 group-hover:underline">
+                        {ticket.subject}
+                      </div>
+                    </Link>
                     <div className="text-[10px] text-gray-400 uppercase tracking-widest">{ticket.category}</div>
                   </td>
                   <td className="px-6 py-4">

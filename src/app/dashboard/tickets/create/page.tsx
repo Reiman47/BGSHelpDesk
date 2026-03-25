@@ -7,7 +7,7 @@ import axios from "axios";
 import { PlusCircle, ArrowLeft, Loader2, Send, Tag, AlertTriangle } from "lucide-react";
 import { useLanguage } from "@/components/LanguageContext";
 
-const CATEGORIES = ["Technical Support", "Billing", "Hardware Repair", "Software License", "General Inquiry"];
+const CATEGORIES = ["Technical Support", "Hardware Repair", "Software License", "General Inquiry"];
 const PRIORITIES = ["LOW", "MEDIUM", "HIGH", "URGENT"];
 
 export default function CreateTicketPage() {

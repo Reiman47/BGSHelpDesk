@@ -104,7 +104,11 @@ export default function DashboardContent({ session, tickets, stats }: DashboardC
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="font-bold text-bgs-navy group-hover:text-bgs-teal transition-colors">{ticket.subject}</div>
+                      <Link href={`/dashboard/tickets/${ticket.id}`} className="block group/subject">
+                        <div className="font-bold text-bgs-navy group-hover/subject:text-bgs-teal transition-colors underline-offset-2 group-hover/subject:underline">
+                          {ticket.subject}
+                        </div>
+                      </Link>
                       <div className="text-[10px] text-gray-400 uppercase tracking-widest">{ticket.category}</div>
                     </td>
                     <td className="px-6 py-4">
