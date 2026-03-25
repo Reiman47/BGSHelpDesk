@@ -28,10 +28,26 @@ export default function RegisterPage() {
 
   const fullName = `${formData.firstName} ${formData.lastName}`.trim();
 
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [sendingOtp, setSendingOtp] = useState(false);
+  const [verifyingOtp, setVerifyingOtp] = useState(false);
+
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.email || formData.email !== formData.confirmEmail) {
-      setError(lang === 'ar' ? 'عناوين البريد الإلكتروني لا تتطابق.' : "Email addresses do not match.");
+    if (!otpVerified) {
+      setError(lang === 'ar' ? 'يرجى التحقق من بريدك الإلكتروني أولاً.' : "Please verify your email with OTP first.");
+      return;
+    }
+    setError("");
+    setStep(2);
+    window.scrollTo(0, 0);
+  };
+
+  const handleSendOtp = async () => {
+    if (!formData.email) {
+      setError(lang === 'ar' ? 'يرجى إدخال عنوان بريد إلكتروني صالح.' : "Please enter a valid email address.");
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,9 +55,35 @@ export default function RegisterPage() {
       setError(lang === 'ar' ? 'يرجى إدخال عنوان بريد إلكتروني صالح.' : "Please enter a valid email address.");
       return;
     }
+
+    setSendingOtp(true);
     setError("");
-    setStep(2);
-    window.scrollTo(0, 0);
+    try {
+      await axios.post("/api/auth/send-registration-otp", { email: formData.email });
+      setOtpSent(true);
+      // No alert, just UI state change
+    } catch (err: any) {
+      setError(err.response?.data?.message || (lang === 'ar' ? 'فشل إرسال الرمز.' : "Failed to send code."));
+    } finally {
+      setSendingOtp(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (!otp || otp.length < 6) {
+      setError(lang === 'ar' ? 'يرجى إدخال رمز التحقق المكون من 6 أرقام.' : "Please enter 6-digit verification code.");
+      return;
+    }
+    setVerifyingOtp(true);
+    setError("");
+    try {
+      await axios.post("/api/auth/verify-registration-otp", { email: formData.email, otp });
+      setOtpVerified(true);
+    } catch (err: any) {
+      setError(err.response?.data?.message || (lang === 'ar' ? 'رمز غير صالح.' : "Invalid code."));
+    } finally {
+      setVerifyingOtp(false);
+    }
   };
 
   const handleBack = () => {
@@ -139,26 +181,62 @@ export default function RegisterPage() {
                   <label className={`block text-sm font-bold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                     {t("emailAddr")}
                   </label>
-                  <input 
-                    type="email"
-                    required
-                    className={`w-full p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  />
+                  <div className="flex gap-2">
+                    <input 
+                      type="email"
+                      required
+                      disabled={otpSent || otpVerified}
+                      className={`flex-grow p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'} disabled:bg-gray-50 focus:border-[#1AA1C5]`}
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    />
+                    {!otpVerified && (
+                      <button 
+                        type="button"
+                        onClick={handleSendOtp}
+                        disabled={sendingOtp || !formData.email}
+                        className="px-4 py-2 bg-[#1AA1C5] text-white font-bold uppercase text-[10px] hover:bg-[#1589a8] transition-all tracking-widest disabled:bg-gray-400 whitespace-nowrap flex items-center justify-center min-w-[120px]"
+                      >
+                        {sendingOtp ? <Loader2 className="animate-spin" size={20} /> : (otpSent ? (lang === 'ar' ? 'إعادة الإرسال' : 'Resend') : t("sendOtp"))}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <label className={`block text-sm font-bold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("confirmEmail")}
-                  </label>
-                  <input 
-                    type="email"
-                    required
-                    className={`w-full p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
-                    value={formData.confirmEmail}
-                    onChange={(e) => setFormData({...formData, confirmEmail: e.target.value})}
-                  />
-                </div>
+
+                {otpSent && !otpVerified && (
+                  <div className="animate-in fade-in slide-in-from-top-2">
+                    <label className={`block text-sm font-bold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {t("enterOtp")}
+                    </label>
+                    <div className="flex gap-2">
+                      <input 
+                        type="text"
+                        required
+                        maxLength={6}
+                        className={`flex-grow p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'} focus:border-[#1AA1C5]`}
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        placeholder="123456"
+                      />
+                      <button 
+                        type="button"
+                        onClick={handleVerifyOtp}
+                        disabled={verifyingOtp || otp.length < 6}
+                        className="px-6 py-2 bg-[#222] text-white font-bold uppercase text-[10px] hover:bg-black transition-all tracking-widest disabled:bg-gray-400 min-w-[120px] flex items-center justify-center"
+                      >
+                        {verifyingOtp ? <Loader2 className="animate-spin" size={20} /> : t("verifyOtp")}
+                      </button>
+                    </div>
+                    <p className={`mt-2 text-[10px] text-gray-500 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>{t("otpInstructions")}</p>
+                  </div>
+                )}
+
+                {otpVerified && (
+                  <div className={`p-4 bg-green-50 border border-green-200 text-green-700 text-sm font-bold rounded flex items-center ${lang === 'ar' ? 'flex-row-reverse' : ''} animate-in zoom-in-95`}>
+                    <span className="mx-2">✓</span>
+                    {t("otpVerified")}
+                  </div>
+                )}
               </div>
 
               <div className={`flex flex-wrap gap-4 pt-6 border-t border-gray-100 pt-10 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -171,7 +249,8 @@ export default function RegisterPage() {
                 </button>
                 <button 
                   type="submit"
-                  className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] transition-all tracking-widest min-w-[140px] shadow-lg"
+                  disabled={!otpVerified}
+                  className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] transition-all tracking-widest min-w-[140px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {t("next")}
                 </button>

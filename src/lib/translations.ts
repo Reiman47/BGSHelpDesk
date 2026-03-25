@@ -146,7 +146,10 @@ export const translations: any = {
     resetSuccess: "Password reset successfully!",
     newPassword: "New Password*",
     confirmNewPassword: "Confirm New Password*",
-    userDoesNotExist: "User does not exist, please register"
+    userDoesNotExist: "User does not exist, please register",
+    sendOtp: "Send Verification Code",
+    emailAlreadyExists: "Email already exists. Please login.",
+    otpVerified: "OTP Verified Successfully"
   },
   ar: {
     welcome: "مرحباً بعودتك",
@@ -295,6 +298,9 @@ export const translations: any = {
     resetSuccess: "تم إعادة تعيين كلمة المرور بنجاح!",
     newPassword: "كلمة المرور الجديدة*",
     confirmNewPassword: "تأكيد كلمة المرور الجديدة*",
-    userDoesNotExist: "يس هذا المستخدم موجود، يرجى التسجيل أولاً."
+    userDoesNotExist: "هذا المستخدم غير موجود، يرجى التسجيل أولاً.",
+    sendOtp: "إرسال رمز التحقق",
+    emailAlreadyExists: "البريد الإلكتروني موجود بالفعل. يرجى تسجيل الدخول.",
+    otpVerified: "تم التحقق من الرمز بنجاح"
   }
 };
