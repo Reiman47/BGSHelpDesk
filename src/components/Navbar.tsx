@@ -113,16 +113,28 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
-              <a href="tel:+97143462244" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                <Phone size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
-                <span>+971-4-3462244</span>
-              </a>
-              <a href="mailto:support@barcodegulf.net" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors mt-1 font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                <Mail size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
-                <span>support@barcodegulf.net</span>
-              </a>
-            </div>
+            {session ? (
+              <div className={`flex items-center space-x-2 ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                <div className="w-8 h-8 rounded-full bg-bgs-teal flex items-center justify-center text-white text-[11px] font-bold uppercase flex-shrink-0">
+                  {session.user?.name ? session.user.name.charAt(0) : session.user?.email?.charAt(0) ?? '?'}
+                </div>
+                <div className={`flex flex-col leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  <span className="text-white text-[11px] font-bold truncate max-w-[130px]">{session.user?.name ?? '—'}</span>
+                  <span className="text-gray-400 text-[10px] truncate max-w-[130px]">{session.user?.email ?? ''}</span>
+                </div>
+              </div>
+            ) : (
+              <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
+                <a href="tel:+97143462244" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <Phone size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
+                  <span>+971-4-3462244</span>
+                </a>
+                <a href="mailto:support@barcodegulf.net" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors mt-1 font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <Mail size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
+                  <span>support@barcodegulf.net</span>
+                </a>
+              </div>
+            )}
 
             {session ? (
               <div className={`flex items-center border-[#444444] ${lang === 'ar' ? 'border-r pr-6 space-x-reverse space-x-3' : 'border-l pl-6 space-x-3'}`}>
