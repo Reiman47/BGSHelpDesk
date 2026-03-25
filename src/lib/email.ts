@@ -18,7 +18,7 @@ export const sendTicketEmail = async (to: string, subject: string, body: string)
     const info = await transporter.sendMail({
       from: `"Barcode Gulf Support" <${process.env.EMAIL_FROM || "support@barcodegulf.com"}>`,
       to,
-      subject: `[Support Ticket] ${subject}`,
+      subject: `[BGS Support Ticket] ${subject}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; max-width: 600px; margin: 30px auto; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e1e1e1;">
           <div style="background-color: #222222; padding: 25px; text-align: center; border-bottom: 4px solid #008BB1;">
