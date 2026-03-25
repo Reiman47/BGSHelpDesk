@@ -58,15 +58,19 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     });
 
     // Notify logic
+    const ticketSubject = reply.ticket.subject;
+    const ticketIdShort = id.slice(-6).toUpperCase();
+
     if (userRole === "ADMIN" || userRole === "SUPERADMIN") {
       // Notify user that admin replied
       await sendTicketEmail(
         reply.ticket.createdBy.email,
-        "Update: Professional Support Response",
+        `Update: ${ticketSubject} [#${ticketIdShort}]`,
         `
           <h2 style="color: #1B365D; margin-top: 0;">Support Team Update</h2>
           <p>Hello ${reply.ticket.createdBy.name},</p>
-          <p>Our support engineer has posted a new update to your case <strong>#${id.slice(-6).toUpperCase()}</strong> (${reply.ticket.subject}):</p>
+          <p>Our support engineer has posted a new update to your case <strong>#${ticketIdShort}</strong>:</p>
+          <p><strong>SUBJECT:</strong> ${ticketSubject}</p>
           <div style="background-color: #f0f7ff; padding: 25px; border-radius: 8px; border: 1px solid #cce3ff; margin: 20px 0; font-style: italic;">
             "${content}"
           </div>
@@ -81,10 +85,11 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       
       await sendTicketEmail(
         recipientEmail,
-        "Activity Notice: Customer Reply",
+        `Customer Reply: ${ticketSubject} [#${ticketIdShort}]`,
         `
           <h2 style="color: #1B365D; margin-top: 0;">New Response from Customer</h2>
-          <p>The customer <strong>${session.user.name}</strong> has posted a response to Ticket <strong>#${id.slice(-6).toUpperCase()}</strong>.</p>
+          <p>The customer <strong>${session.user.name}</strong> has posted a response to Ticket <strong>#${ticketIdShort}</strong>.</p>
+          <p><strong>TICKET SUBJECT:</strong> ${ticketSubject}</p>
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 4px; border: 1px solid #eee; margin: 20px 0;">
             <p style="margin: 0; color: #666; font-size: 13px;">MESSAGE CONTENT:</p>
             <p style="margin-top: 10px; font-weight: 500;">${content}</p>
