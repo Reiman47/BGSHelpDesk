@@ -29,11 +29,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "User already exists. Please login." }, { status: 409 });
     }
 
-    // Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-
-    console.log(`[AUTH] REGISTRATION OTP for ${email}: ${otp}`);
 
     await prisma.registrationOtp.upsert({
       where: { email },
