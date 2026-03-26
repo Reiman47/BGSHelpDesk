@@ -18,8 +18,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Advanced Support Ticketing System | Barcode Gulf Solutions",
-  description: "Enterprise-grade support ticketing system for seamless customer service.",
+  title: "Support Ticketing System | Barcode Gulf Solutions",
+  description: "Enterprise-grade ticketing system for seamless customer service.",
 };
 
 export default function RootLayout({

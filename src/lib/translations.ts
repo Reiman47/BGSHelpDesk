@@ -61,7 +61,7 @@ export const translations: any = {
     success: "Success",
     error: "Error",
     heroTitle: "Enterprise",
-    heroTitle2: "Support Ticketing System",
+    heroTitle2: "Ticketing System",
     heroDesc: "Experience seamless technical assistance and asset management. Our dedicated team is here to ensure your operations never stop.",
     getStarted: "Get Started",
     memberLogin: "Member Login",

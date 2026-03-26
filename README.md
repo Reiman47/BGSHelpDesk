@@ -1,6 +1,6 @@
-# Enterprise Support Ticketing System (Barcode Gulf Branding)
+# Enterprise Ticketing System (Barcode Gulf Branding)
 
-A fully functional, full-stack support ticketing system built with Next.js 14, Prisma, SQLite, and NextAuth. The UI is custom-designed based on the corporate aesthetic of Barcode Gulf Solutions.
+A fully functional, full-stack ticketing system built with Next.js 14, Prisma, SQLite, and NextAuth. The UI is custom-designed based on the corporate aesthetic of Barcode Gulf Solutions.
 
 ## Features
 

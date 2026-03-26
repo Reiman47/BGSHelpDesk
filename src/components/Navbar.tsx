@@ -46,20 +46,20 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#222222]/95 shadow-md" : "bg-[#222222]"
-      } py-[7.5px]`}
+        isScrolled ? "bg-[#222222]/95 shadow-md py-1.5" : "bg-[#222222] py-2.5"
+      }`}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex justify-between items-center h-[60px]">
+        <div className="flex justify-between items-center">
           {/* Left Side: Logo & Socials */}
-          <div className="flex items-center h-full">
-            <Link href="/" className="bg-white px-4 h-full flex items-center transition-transform hover:scale-105 shadow-sm">
+          <div className="flex items-center">
+            <Link href="/" className="bg-white p-2 rounded-md transition-transform hover:scale-105 shadow-sm">
               <Image 
                 src="/logo.jpg" 
                 alt="Barcode Gulf Solutions" 
-                width={270} 
-                height={60} 
-                className="h-[50px] md:h-[60px] w-auto object-contain"
+                width={150} 
+                height={50} 
+                className="h-10 w-auto object-contain"
                 priority
               />
             </Link>
