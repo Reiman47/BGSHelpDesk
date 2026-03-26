@@ -46,28 +46,28 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#222222]/95 shadow-md py-1.5" : "bg-[#222222] py-2.5"
+        isScrolled ? "bg-[#222222]/95 shadow-md py-1" : "bg-[#222222] py-1.5"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Left Side: Logo & Socials */}
           <div className="flex items-center">
-            <Link href="/" className="bg-white p-2 rounded-md transition-transform hover:scale-105 shadow-sm">
+            <Link href="/" className="bg-white p-1 rounded-md transition-transform hover:scale-105 shadow-sm">
               <Image 
                 src="/logo.jpg" 
                 alt="Barcode Gulf Solutions" 
-                width={150} 
-                height={50} 
-                className="h-10 w-auto object-contain"
+                width={120} 
+                height={40} 
+                className="h-8 w-auto object-contain"
                 priority
               />
             </Link>
             
             <div className="hidden lg:flex items-center ml-6 space-x-3">
-              <Link href="https://www.facebook.com/Barcodegulfmiddleeast/" target="_blank" className="text-gray-400 hover:text-white transition-colors"><Facebook size={18} /></Link>
-              <Link href="https://www.linkedin.com/company/barcode-gulf/" target="_blank" className="text-gray-400 hover:text-white transition-colors"><Linkedin size={18} /></Link>
-              <Link href="https://www.instagram.com/barcode_gulf/#" target="_blank" className="text-gray-400 hover:text-white transition-colors"><Instagram size={18} /></Link>
+              <Link href="https://www.facebook.com/Barcodegulfmiddleeast/" target="_blank" className="text-gray-400 hover:text-white transition-colors"><Facebook size={15} /></Link>
+              <Link href="https://www.linkedin.com/company/barcode-gulf/" target="_blank" className="text-gray-400 hover:text-white transition-colors"><Linkedin size={15} /></Link>
+              <Link href="https://www.instagram.com/barcode_gulf/#" target="_blank" className="text-gray-400 hover:text-white transition-colors"><Instagram size={15} /></Link>
               <Link href="https://x.com/GulfBarcode/" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center justify-center">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
@@ -120,17 +120,17 @@ export default function Navbar() {
                   className="text-gray-400 hover:text-white transition-colors p-1 border-l border-[#444444] pl-4"
                   title={t("logout")}
                 >
-                   <LogOut size={18} />
+                   <LogOut size={16} />
                 </button>
               </div>
             ) : (
               <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
-                <a href="tel:+966112131355" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <Phone size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
+                <a href="tel:+966112131355" className={`flex items-center text-[11px] text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <Phone size={12} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
                   <span>+966 11 213 1355</span>
                 </a>
-                <a href="mailto:support@barcodegulf.net" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors mt-1 font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <Mail size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
+                <a href="mailto:support@barcodegulf.net" className={`flex items-center text-[11px] text-white hover:text-bgs-teal transition-colors mt-0.5 font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <Mail size={12} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
                   <span>support@barcodegulf.net</span>
                 </a>
               </div>
@@ -146,7 +146,7 @@ export default function Navbar() {
                 </Link>
                 <Link 
                   href="/auth/register" 
-                  className="bg-bgs-teal text-white px-5 py-2 rounded shadow-md hover:bg-[#1589a8] transition-all text-xs font-bold uppercase tracking-widest"
+                  className="bg-bgs-teal text-white px-4 py-1.5 rounded shadow-md hover:bg-[#1589a8] transition-all text-xs font-bold uppercase tracking-widest"
                 >
                   {t("register")}
                 </Link>
