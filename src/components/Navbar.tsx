@@ -125,9 +125,9 @@ export default function Navbar() {
               </div>
             ) : (
               <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
-                <a href="tel:+97143462244" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                <a href="tel:+966112131355" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                   <Phone size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
-                  <span>+971-4-3462244</span>
+                  <span>+966 11 213 1355</span>
                 </a>
                 <a href="mailto:support@barcodegulf.net" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors mt-1 font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                   <Mail size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />

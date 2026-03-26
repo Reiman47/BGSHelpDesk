@@ -58,7 +58,8 @@ export default function PerformanceReportsPage() {
       [lang === 'ar' ? "إجمالي ساعات الدعم" : "Total Support Hours"]: stat.totalTimeHours,
       [lang === 'ar' ? "متوسط ساعات الحل" : "Average Resolution Hours"]: stat.avgResolutionTimeHours,
       [lang === 'ar' ? "توزيع العملاء" : "Customer Breakdown"]: Object.entries(stat.customerBreakdown || {}).map(([k, v]) => `${k} (${v})`).join(', '),
-      [lang === 'ar' ? "توزيع الموديل" : "Model Breakdown"]: Object.entries(stat.modelBreakdown || {}).map(([k, v]) => `${k} (${v})`).join(', ')
+      [lang === 'ar' ? "توزيع الموديل" : "Model Breakdown"]: Object.entries(stat.modelBreakdown || {}).map(([k, v]) => `${k} (${v})`).join(', '),
+      [lang === 'ar' ? "تفاصيل التذاكر (التذكرة: الساعات)" : "Ticket Details (Ticket: Hours)"]: (stat.tickets || []).map((t: any) => `${t.id.slice(-6)}: ${t.resolutionTimeHours}h`).join(', ')
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(exportData);
@@ -73,6 +74,7 @@ export default function PerformanceReportsPage() {
       { wch: 25 }, // Avg Resolution
       { wch: 40 }, // Customer Breakdown
       { wch: 40 }, // Model Breakdown
+      { wch: 60 }, // Ticket Details
     ];
     worksheet['!cols'] = colWidths;
 
@@ -150,7 +152,7 @@ export default function PerformanceReportsPage() {
             <table className={`w-full ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
               <thead>
                 <tr className="bg-gray-50 text-[10px] font-bold uppercase text-gray-400 tracking-widest border-b">
-                  <th className="px-8 py-5">{lang === 'ar' ? "أداء مسؤول الدعم" : "Support Admin Performance"}</th>
+                  <th className="px-8 py-5">{lang === 'ar' ? "مسؤول الدعم" : "Support Admin"}</th>
                   <th className="px-6 py-5">{lang === 'ar' ? "التذاكر المغلقة" : "Closed Tickets"}</th>
                   <th className="px-6 py-5">{lang === 'ar' ? "إجمالي وقت الدعم" : "Total Support Time"}</th>
                   <th className="px-6 py-5">{lang === 'ar' ? "متوسط الحل" : "Avg Resolution"}</th>
@@ -194,18 +196,18 @@ export default function PerformanceReportsPage() {
                     {expandedAdmin === stat.adminId && (
                       <tr className="bg-gray-50/30 border-t-0 shadow-inner">
                         <td colSpan={5} className="px-8 py-8 animate-in slide-in-from-top-4 duration-300">
-                           <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                           <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                              {/* Customer Wise */}
                              <div>
                                <h4 className={`flex items-center text-xs font-bold text-bgs-navy uppercase tracking-widest mb-4 border-b pb-2 border-gray-200/50 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                  <Building2 className={lang === 'ar' ? 'ml-2 text-bgs-teal' : 'mr-2 text-bgs-teal'} size={14} /> 
                                  {lang === 'ar' ? "توزيع العملاء" : "Customer-wise Breakdown"}
                                </h4>
-                               <div className="space-y-3">
+                               <div className="space-y-2">
                                   {Object.entries(stat.customerBreakdown).map(([name, count]: any) => (
-                                    <div key={name} className={`flex items-center justify-between text-sm bg-white p-3 rounded-lg border border-gray-100/50 shadow-sm ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <div key={name} className={`flex items-center justify-between text-xs bg-white p-2.5 rounded-lg border border-gray-100/50 shadow-sm ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                       <span className="text-gray-700 font-medium">{name}</span>
-                                      <span className="bg-bgs-teal text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">{count} {lang === 'ar' ? "تذاكر" : "Tickets"}</span>
+                                      <span className="bg-teal-50 text-bgs-teal text-[10px] font-bold px-2 py-0.5 rounded border border-teal-100">{count} {lang === 'ar' ? "تذاكر" : "Tickets"}</span>
                                     </div>
                                   ))}
                                </div>
@@ -217,11 +219,33 @@ export default function PerformanceReportsPage() {
                                  <Package className={lang === 'ar' ? 'ml-2 text-bgs-teal' : 'mr-2 text-bgs-teal'} size={14} /> 
                                  {lang === 'ar' ? "توزيع الموديل / الفئة" : "Model / Category Breakdown"}
                                </h4>
-                               <div className="space-y-3">
+                               <div className="space-y-2">
                                   {Object.entries(stat.modelBreakdown).map(([model, count]: any) => (
-                                    <div key={model} className={`flex items-center justify-between text-sm bg-white p-3 rounded-lg border border-gray-100/50 shadow-sm ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <div key={model} className={`flex items-center justify-between text-xs bg-white p-2.5 rounded-lg border border-gray-100/50 shadow-sm ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                       <span className="text-gray-700 font-medium">{model}</span>
-                                      <span className="bg-bgs-navy text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">{count} {lang === 'ar' ? "تذاكر" : "Tickets"}</span>
+                                      <span className="bg-navy-50 text-bgs-navy text-[10px] font-bold px-2 py-0.5 rounded border border-navy-100">{count} {lang === 'ar' ? "تذاكر" : "Tickets"}</span>
+                                    </div>
+                                  ))}
+                               </div>
+                             </div>
+
+                             {/* Ticket Wise Support Time */}
+                             <div className="md:col-span-2 lg:col-span-1">
+                               <h4 className={`flex items-center text-xs font-bold text-bgs-navy uppercase tracking-widest mb-4 border-b pb-2 border-gray-200/50 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                 <Clock className={lang === 'ar' ? 'ml-2 text-bgs-teal' : 'mr-2 text-bgs-teal'} size={14} /> 
+                                 {lang === 'ar' ? "وقت الدعم لكل تذكرة" : "Ticket-wise Support Time"}
+                               </h4>
+                               <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                                  {stat.tickets?.map((ticket: any) => (
+                                    <div key={ticket.id} className={`flex flex-col space-y-1 text-xs bg-white p-2.5 rounded-lg border border-gray-100/50 shadow-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                                      <div className={`flex items-center justify-between ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                        <span className="text-bgs-navy font-bold truncate max-w-[150px]" title={ticket.subject}>#{ticket.id.slice(-6)} - {ticket.subject}</span>
+                                        <span className="text-bgs-teal font-bold">{ticket.resolutionTimeHours}h</span>
+                                      </div>
+                                      <div className={`flex items-center text-[10px] text-gray-400 uppercase tracking-wider ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                        <Building2 size={10} className={lang === 'ar' ? 'ml-1' : 'mr-1'} />
+                                        <span>{ticket.customer}</span>
+                                      </div>
                                     </div>
                                   ))}
                                </div>

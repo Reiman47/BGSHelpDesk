@@ -46,7 +46,8 @@ export async function GET(req: Request) {
           totalClosed: 0,
           totalTimeMs: 0,
           customers: {},
-          models: {}
+          models: {},
+          tickets: [] // Add this
         };
       }
 
@@ -64,6 +65,14 @@ export async function GET(req: Request) {
         adminStats[adminId].models[model] = 0;
       }
       adminStats[adminId].models[model] += 1;
+
+      // Add ticket detail
+      adminStats[adminId].tickets.push({
+        id: ticket.id,
+        subject: ticket.subject,
+        customer: customer,
+        resolutionTimeHours: resolutionTimeHours.toFixed(2)
+      });
     });
 
     // Format for easier consumption
@@ -78,7 +87,8 @@ export async function GET(req: Request) {
           : "0.00",
         totalTimeHours: (stats.totalTimeMs / (1000 * 60 * 60)).toFixed(2),
         customerBreakdown: stats.customers,
-        modelBreakdown: stats.models
+        modelBreakdown: stats.models,
+        tickets: stats.tickets // Return this
       };
     });
 
