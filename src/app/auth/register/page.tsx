@@ -37,7 +37,7 @@ export default function RegisterPage() {
   const handleNext = async (e: React.FormEvent) => {
     e.preventDefault();
     if (step === 1) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!formData.email || !emailRegex.test(formData.email)) {
         setError(lang === 'ar' ? 'يرجى إدخال عنوان بريد إلكتروني صالح.' : "Please enter a valid email address.");
         return;
