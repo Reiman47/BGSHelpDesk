@@ -150,7 +150,19 @@ export const translations: any = {
     sendOtp: "Send Verification Code",
     emailAlreadyExists: "Email already exists. Please login.",
     otpVerified: "OTP Verified Successfully",
-    all: "All"
+    all: "All",
+    registerPortal: "Repair Portal Account Registration",
+    registerEmail: "Register with email:",
+    emailNote: "Use your business email domain for quick and accurate registration and to avoid delays. Personal emails will require extra validation and cause some delay.",
+    emailIdNote: "Your email address will be your User ID",
+    verifyStepTitle: "Repair Portal Email Verification",
+    otpSentSuccess: "Your request has been received. We have sent a verification code through your email to verify your account. Please enter your verification code below to finish registration.",
+    resendNote: "Can't find your email? Please check your junk mail or click this link: ",
+    resendLink: "Resend Verification Code.",
+    returnStep: "Return to Previous Step",
+    step1Step: "Enter User Email Address",
+    step2Step: "Verify User Email Address",
+    step3Step: "Enter User & Application Information"
   },
   ar: {
     welcome: "مرحباً بعودتك",
@@ -303,6 +315,18 @@ export const translations: any = {
     sendOtp: "إرسال رمز التحقق",
     emailAlreadyExists: "البريد الإلكتروني موجود بالفعل. يرجى تسجيل الدخول.",
     otpVerified: "تم التحقق من الرمز بنجاح",
-    all: "الكل"
+    all: "الكل",
+    registerPortal: "تسجيل حساب بوابة الإصلاح",
+    registerEmail: "التسجيل بالبريد الإلكتروني:",
+    emailNote: "استخدم مجال البريد الإلكتروني الخاص بعملك للتسجيل السريع والدقيق وتجنب التأخير. ستتطلب رسائل البريد الإلكتروني الشخصية تحقلاً إضافياً وتسبب بعض التأخير.",
+    emailIdNote: "سيكون عنوان بريدك الإلكتروني هو معرف المستخدم الخاص بك",
+    verifyStepTitle: "التحقق من البريد الإلكتروني لبوابة الإصلاح",
+    otpSentSuccess: "تم استلام طلبك. لقد أرسلنا رمز تحقق عبر بريدك الإلكتروني للتحقق من حسابك. يرجى إدخال رمز التحقق أدناه لإنهاء التسجيل.",
+    resendNote: "لا تجد البريد الإلكتروني؟ يرجى التحقق من البريد المهمل أو النقر على هذا الرابط: ",
+    resendLink: "إعادة إرسال رمز التحقق.",
+    returnStep: "العودة إلى الخطوة السابقة",
+    step1Step: "أدخل عنوان البريد الإلكتروني للمستخدم",
+    step2Step: "تحقق من عنوان البريد الإلكتروني للمستخدم",
+    step3Step: "أدخل معلومات المستخدم والتطبيق"
   }
 };
