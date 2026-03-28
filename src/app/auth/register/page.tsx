@@ -217,7 +217,7 @@ export default function RegisterPage() {
                     <input 
                       type="email"
                       required
-                      className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                      className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                     />
@@ -237,7 +237,7 @@ export default function RegisterPage() {
                 <button 
                   type="submit"
                   disabled={sendingOtp}
-                  className="w-full md:w-auto px-12 py-3 bg-black text-white font-bold uppercase text-sm hover:bg-gray-800 transition-all flex items-center justify-center rounded-full min-w-[140px]"
+                  className="w-full md:w-auto px-12 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-sm hover:bg-[#1589a8] transition-all flex items-center justify-center rounded-md min-w-[140px] shadow-sm"
                 >
                   {sendingOtp && <Loader2 className="animate-spin mr-2" size={18} />}
                   {t("next")}
@@ -245,7 +245,7 @@ export default function RegisterPage() {
                 <button 
                   type="button"
                   onClick={() => router.push("/auth/login")}
-                  className="w-full md:w-auto px-12 py-3 border border-gray-400 bg-white text-black font-bold uppercase text-sm hover:bg-gray-50 transition-all rounded-full min-w-[140px]"
+                  className="w-full md:w-auto px-12 py-3 border border-gray-300 bg-white text-black font-bold uppercase text-sm hover:bg-gray-50 transition-all rounded-md min-w-[140px] shadow-sm"
                 >
                   {t("cancel")}
                 </button>
@@ -280,7 +280,7 @@ export default function RegisterPage() {
                     type="text"
                     required
                     maxLength={6}
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none transition-all bg-white text-sm text-center`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm text-center font-bold tracking-widest`}
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     placeholder="123456"
@@ -293,7 +293,7 @@ export default function RegisterPage() {
                   <button 
                     type="submit"
                     disabled={verifyingOtp}
-                    className="w-full md:w-auto px-12 py-3 bg-black text-white font-bold uppercase text-sm hover:bg-gray-800 transition-all flex items-center justify-center rounded-full min-w-[140px]"
+                    className="w-full md:w-auto px-12 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-sm hover:bg-[#1589a8] transition-all flex items-center justify-center rounded-md min-w-[140px] shadow-sm"
                   >
                     {verifyingOtp && <Loader2 className="animate-spin mr-2" size={18} />}
                     {t("next")}
@@ -301,7 +301,7 @@ export default function RegisterPage() {
                   <button 
                     type="button"
                     onClick={() => router.push("/auth/login")}
-                    className="w-full md:w-auto px-12 py-3 border border-gray-400 bg-white text-black font-bold uppercase text-sm hover:bg-gray-50 transition-all rounded-full min-w-[140px]"
+                    className="w-full md:w-auto px-12 py-3 border border-gray-300 bg-white text-black font-bold uppercase text-sm hover:bg-gray-50 transition-all rounded-md min-w-[140px] shadow-sm"
                   >
                     {t("cancel")}
                   </button>
@@ -310,7 +310,7 @@ export default function RegisterPage() {
                 <button 
                   type="button" 
                   onClick={handleBack}
-                  className="text-blue-600 hover:underline font-bold text-sm"
+                  className="text-[#1AA1C5] hover:underline font-bold text-sm"
                 >
                   {t("returnStep")}
                 </button>
@@ -330,13 +330,13 @@ export default function RegisterPage() {
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                     {t("firstName")}
                   </label>
-                  <input 
-                    type="text"
-                    required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                  />
+                <input 
+                  type="text"
+                  required
+                  className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                />
                 </div>
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
@@ -345,7 +345,7 @@ export default function RegisterPage() {
                   <input 
                     type="text"
                     required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                     value={formData.lastName}
                     onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                   />
@@ -357,7 +357,7 @@ export default function RegisterPage() {
                   <input 
                     type="text"
                     required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                     value={formData.companyName}
                     onChange={(e) => setFormData({...formData, companyName: e.target.value})}
                   />
@@ -369,7 +369,7 @@ export default function RegisterPage() {
                   <input 
                     type="text"
                     required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                     value={formData.contactNumber}
                     onChange={(e) => setFormData({...formData, contactNumber: e.target.value})}
                   />
@@ -380,7 +380,7 @@ export default function RegisterPage() {
                   </label>
                   <textarea 
                     required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none resize-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none resize-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                     rows={3}
                     value={formData.address}
                     onChange={(e) => setFormData({...formData, address: e.target.value})}
@@ -393,7 +393,7 @@ export default function RegisterPage() {
                   <input 
                     type="password"
                     required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                     value={formData.password}
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
                   />
@@ -405,7 +405,7 @@ export default function RegisterPage() {
                   <input 
                     type="password"
                     required
-                    className={`w-full p-2.5 border border-gray-400 rounded-sm focus:ring-1 focus:ring-black outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
                   />
@@ -416,14 +416,14 @@ export default function RegisterPage() {
                 <button 
                   type="button"
                   onClick={handleBack}
-                  className="w-full md:w-auto px-12 py-3 border border-gray-400 bg-white text-black font-bold uppercase text-sm hover:bg-gray-50 transition-all rounded-full min-w-[140px]"
+                  className="w-full md:w-auto px-12 py-3 border border-gray-300 bg-white text-black font-bold uppercase text-sm hover:bg-gray-50 transition-all rounded-md min-w-[140px] shadow-sm"
                 >
                   {t("back")}
                 </button>
                 <button 
                   type="submit"
                   disabled={loading}
-                  className="w-full md:w-auto px-12 py-3 bg-black text-white font-bold uppercase text-sm hover:bg-gray-800 transition-all flex items-center justify-center rounded-full min-w-[200px]"
+                  className="w-full md:w-auto px-12 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-sm hover:bg-[#1589a8] transition-all flex items-center justify-center rounded-md min-w-[200px] shadow-sm"
                 >
                   {loading && <Loader2 className="animate-spin mr-2" size={18} />}
                   {t("completeReg")}
