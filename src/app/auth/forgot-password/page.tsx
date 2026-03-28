@@ -155,7 +155,7 @@ export default function ForgotPasswordPage() {
               )}
 
               <div>
-                <label className={`block text-sm font-bold text-[#555555] mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t("emailAddr")}</label>
+                <label className={`block text-sm font-bold text-[#555555] mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t("emailAddr")} <span className="text-red-600">*</span></label>
                 <input
                   type="email" required value={email}
                   onChange={(e) => { setEmail(e.target.value); setErrorMsg(""); }}
@@ -223,7 +223,7 @@ export default function ForgotPasswordPage() {
               )}
 
               <div>
-                <label className={`block text-sm font-bold text-[#555555] mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t("newPassword")}</label>
+                <label className={`block text-sm font-bold text-[#555555] mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t("newPassword")} <span className="text-red-600">*</span></label>
                 <input
                   type="password" required value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
@@ -231,7 +231,7 @@ export default function ForgotPasswordPage() {
                 />
               </div>
               <div>
-                <label className={`block text-sm font-bold text-[#555555] mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t("confirmNewPassword")}</label>
+                <label className={`block text-sm font-bold text-[#555555] mb-2 ${isRTL ? "text-right" : "text-left"}`}>{t("confirmNewPassword")} <span className="text-red-600">*</span></label>
                 <input
                   type="password" required value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}

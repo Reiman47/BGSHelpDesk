@@ -328,7 +328,7 @@ export default function RegisterPage() {
                 {/* ... existing fields ... */}
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("firstName")}
+                    {t("firstName")} <span className="text-red-600">*</span>
                   </label>
                 <input 
                   type="text"
@@ -340,7 +340,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("lastName")}
+                    {t("lastName")} <span className="text-red-600">*</span>
                   </label>
                   <input 
                     type="text"
@@ -352,7 +352,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("companyName")}
+                    {t("companyName")} <span className="text-red-600">*</span>
                   </label>
                   <input 
                     type="text"
@@ -364,7 +364,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("phone")}
+                    {t("phone")} <span className="text-red-600">*</span>
                   </label>
                   <input 
                     type="text"
@@ -376,7 +376,7 @@ export default function RegisterPage() {
                 </div>
                 <div className="md:col-span-2">
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("address")}
+                    {t("address")} <span className="text-red-600">*</span>
                   </label>
                   <textarea 
                     required
@@ -388,7 +388,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("password")}
+                    {t("password")} <span className="text-red-600">*</span>
                   </label>
                   <input 
                     type="password"
@@ -400,7 +400,7 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label className={`block text-sm font-bold text-[#111111] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {t("confirmPass")}
+                    {t("confirmPass")} <span className="text-red-600">*</span>
                   </label>
                   <input 
                     type="password"

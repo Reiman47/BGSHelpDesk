@@ -100,7 +100,7 @@ export default function LoginPage() {
             <div className="space-y-5">
               <div>
                 <label className={`block text-sm font-semibold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {t("username")}
+                  {t("username")} <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="email"
@@ -113,7 +113,7 @@ export default function LoginPage() {
 
               <div>
                 <label className={`block text-sm font-semibold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {t("password")}
+                  {t("password")} <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="password"
@@ -125,7 +125,9 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <p className={`text-[10px] text-[#999999] italic ${lang === 'ar' ? 'text-right' : 'text-left'}`}>{t("mandatory")}</p>
+            <p className={`text-[10px] text-[#999999] italic ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+              <span className="text-red-600">*</span>Mandatory fields
+            </p>
 
             <div className={`pt-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
               <button
