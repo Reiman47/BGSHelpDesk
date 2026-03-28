@@ -212,7 +212,7 @@ export default function RegisterPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold text-[#111111] mb-2 uppercase">
-                      {t("emailAddr")} <span className="text-red-600">*</span>
+                      {t("emailAddr")}
                     </label>
                     <input 
                       type="email"
