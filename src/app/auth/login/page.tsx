@@ -61,18 +61,20 @@ export default function LoginPage() {
       {/* Login Card */}
       <div className="max-w-[550px] w-full bg-white shadow-xl overflow-hidden rounded-sm border border-gray-100">
         {/* Header with Logo */}
-        <div className={`p-8 pb-6 flex items-end justify-between bg-white ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-          <Link href="/" className="hover:opacity-80 transition-opacity">
-            <Image 
-              src="/logo.jpg" 
-              alt="Barcode Gulf Solutions" 
-              width={180} 
-              height={60} 
-              className="h-12 w-auto object-contain"
-              priority
-            />
-          </Link>
-          <div className={`text-[#888888] text-[10px] mb-1 font-medium italic hidden md:block ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+        <div className={`p-4 md:p-8 pb-6 flex flex-col md:flex-row md:items-end justify-between bg-white gap-4 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
+          <div className="flex justify-center md:justify-start w-full md:w-auto">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <Image 
+                src="/logo.jpg" 
+                alt="Barcode Gulf Solutions" 
+                width={180} 
+                height={60} 
+                className="h-10 md:h-12 w-auto object-contain"
+                priority
+              />
+            </Link>
+          </div>
+          <div className={`text-[#888888] text-[10px] mb-1 font-medium italic ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
             <button 
               onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
               className="hover:text-[#1AA1C5] transition-colors uppercase tracking-tighter decoration-dotted underline underline-offset-4"

@@ -121,18 +121,18 @@ export default function RegisterPage() {
   return (
     <div className={`min-h-screen bg-[#F0F2F5] font-montserrat flex flex-col items-center text-[#111111] ${lang === 'ar' ? 'rtl' : 'ltr'}`}>
       {/* Simplify Header inspired by Zebra */}
-      <header className={`w-full bg-white p-6 px-10 flex justify-between items-center shadow-sm border-b border-gray-100 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+      <header className={`w-full bg-white p-4 md:p-6 px-6 md:px-10 flex flex-col md:flex-row justify-between items-center shadow-sm border-b border-gray-100 gap-4 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
         <Link href="/" className="hover:opacity-80 transition-opacity">
           <Image 
             src="/logo.jpg" 
             alt="Barcode Gulf" 
             width={180} 
             height={60} 
-            className="h-10 w-auto object-contain"
+            className="h-8 md:h-10 w-auto object-contain"
             priority
           />
         </Link>
-        <div className={`text-[10px] italic text-gray-400 hidden md:block ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+        <div className={`text-[10px] italic text-gray-400 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
           <button 
             onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
             className="hover:text-[#1AA1C5] transition-colors uppercase tracking-tighter decoration-dotted underline underline-offset-4"
@@ -148,16 +148,16 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-bold text-center mb-10 text-[#222222]">{t("register")}</h1>
 
         {/* Zebra Stepper */}
-        <div className={`flex items-center justify-center mb-16 relative ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+        <div className={`flex items-center justify-center mb-16 relative px-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center w-full max-w-sm ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
             <div className="relative flex flex-col items-center flex-1">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 1 ? 'bg-[#1AA1C5] border-[#1AA1C5] text-white' : 'bg-white border-gray-300 text-gray-400'} font-bold text-base z-10 transition-all`}>1</div>
-              <span className="absolute -bottom-7 text-[10px] font-bold uppercase tracking-tighter whitespace-nowrap">{t("userEmail")}</span>
+              <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-2 ${step >= 1 ? 'bg-[#1AA1C5] border-[#1AA1C5] text-white' : 'bg-white border-gray-300 text-gray-400'} font-bold text-sm md:text-base z-10 transition-all`}>1</div>
+              <span className="absolute -bottom-7 text-[9px] md:text-[10px] font-bold uppercase tracking-tighter whitespace-nowrap">{t("userEmail")}</span>
             </div>
-            <div className={`flex-grow h-[2px] ${step > 1 ? 'bg-[#1AA1C5]' : 'bg-gray-300'} transition-all`}></div>
+            <div className={`flex-grow h-[2px] ${step > 1 ? 'bg-[#1AA1C5]' : 'bg-gray-300'} transition-all mx-2`}></div>
             <div className="relative flex flex-col items-center flex-1">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 2 ? 'bg-[#1AA1C5] border-[#1AA1C5] text-white' : 'bg-white border-gray-300 text-gray-400'} font-bold text-base z-10 transition-all`}>2</div>
-              <span className="absolute -bottom-7 text-[10px] font-bold uppercase tracking-tighter whitespace-nowrap">{t("userInformation")}</span>
+              <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-2 ${step >= 2 ? 'bg-[#1AA1C5] border-[#1AA1C5] text-white' : 'bg-white border-gray-300 text-gray-400'} font-bold text-sm md:text-base z-10 transition-all`}>2</div>
+              <span className="absolute -bottom-7 text-[9px] md:text-[10px] font-bold uppercase tracking-tighter whitespace-nowrap">{t("userInformation")}</span>
             </div>
           </div>
         </div>
@@ -176,17 +176,17 @@ export default function RegisterPage() {
                 <h2 className="text-xl font-bold text-[#333333]">{t("enterEmail")}</h2>
               </div>
               
-              <div className={`space-y-8 max-w-md ${lang === 'ar' ? 'ml-auto' : ''}`}>
+              <div className={`space-y-6 md:space-y-8 max-w-md ${lang === 'ar' ? 'ml-auto' : ''}`}>
                 <div>
                   <label className={`block text-sm font-bold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                     {t("emailAddr")}
                   </label>
-                  <div className="flex gap-2">
+                  <div className={`flex flex-col md:flex-row gap-3`}>
                     <input 
                       type="email"
                       required
                       disabled={otpSent || otpVerified}
-                      className={`flex-grow p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'} disabled:bg-gray-50 focus:border-[#1AA1C5]`}
+                      className={`w-full md:flex-grow p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'} disabled:bg-gray-50 focus:border-[#1AA1C5]`}
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                     />
@@ -195,7 +195,7 @@ export default function RegisterPage() {
                         type="button"
                         onClick={handleSendOtp}
                         disabled={sendingOtp || !formData.email}
-                        className="px-4 py-2 bg-[#1AA1C5] text-white font-bold uppercase text-[10px] hover:bg-[#1589a8] transition-all tracking-widest disabled:bg-gray-400 whitespace-nowrap flex items-center justify-center min-w-[120px]"
+                        className="w-full md:w-auto px-6 py-3.5 md:py-2 bg-[#1AA1C5] text-white font-bold uppercase text-[10px] hover:bg-[#1589a8] transition-all tracking-widest disabled:bg-gray-400 whitespace-nowrap flex items-center justify-center md:min-w-[140px] rounded-md shadow-sm"
                       >
                         {sendingOtp ? <Loader2 className="animate-spin" size={20} /> : (otpSent ? (lang === 'ar' ? 'إعادة الإرسال' : 'Resend') : t("sendOtp"))}
                       </button>
@@ -208,12 +208,12 @@ export default function RegisterPage() {
                     <label className={`block text-sm font-bold text-[#555555] mb-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                       {t("enterOtp")}
                     </label>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col md:flex-row gap-3">
                       <input 
                         type="text"
                         required
                         maxLength={6}
-                        className={`flex-grow p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'} focus:border-[#1AA1C5]`}
+                        className={`w-full md:flex-grow p-3.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm ${lang === 'ar' ? 'text-right' : 'text-left'} focus:border-[#1AA1C5]`}
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                         placeholder="123456"
@@ -222,7 +222,7 @@ export default function RegisterPage() {
                         type="button"
                         onClick={handleVerifyOtp}
                         disabled={verifyingOtp || otp.length < 6}
-                        className="px-6 py-2 bg-[#222] text-white font-bold uppercase text-[10px] hover:bg-black transition-all tracking-widest disabled:bg-gray-400 min-w-[120px] flex items-center justify-center"
+                        className="w-full md:w-auto px-6 py-3.5 md:py-2 bg-[#222] text-white font-bold uppercase text-[10px] hover:bg-black transition-all tracking-widest disabled:bg-gray-400 md:min-w-[140px] flex items-center justify-center rounded-md shadow-sm"
                       >
                         {verifyingOtp ? <Loader2 className="animate-spin" size={20} /> : t("verifyOtp")}
                       </button>
@@ -239,18 +239,18 @@ export default function RegisterPage() {
                 )}
               </div>
 
-              <div className={`flex flex-wrap gap-4 pt-6 border-t border-gray-100 pt-10 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+              <div className={`flex flex-col md:flex-row gap-4 pt-10 border-t border-gray-100 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
                 <button 
                   type="button"
                   onClick={() => router.push("/auth/login")}
-                  className="px-10 py-3 border-2 border-[#111111] font-bold uppercase text-xs hover:bg-gray-50 transition-all tracking-widest min-w-[140px]"
+                  className="w-full md:w-auto px-10 py-4 md:py-3 border-2 border-[#111111] font-bold uppercase text-xs hover:bg-gray-50 transition-all tracking-widest md:min-w-[140px] rounded-md"
                 >
                   {t("cancel")}
                 </button>
                 <button 
                   type="submit"
                   disabled={!otpVerified}
-                  className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] transition-all tracking-widest min-w-[140px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full md:w-auto px-10 py-4 md:py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] transition-all tracking-widest md:min-w-[140px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed rounded-md"
                 >
                   {t("next")}
                 </button>
@@ -349,18 +349,18 @@ export default function RegisterPage() {
                 </div>
               </div>
 
-              <div className={`flex flex-wrap gap-4 pt-10 border-t border-gray-100 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+              <div className={`flex flex-col md:flex-row gap-4 pt-10 border-t border-gray-100 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
                 <button 
                   type="button"
                   onClick={handleBack}
-                  className="px-10 py-3 border-2 border-black font-bold uppercase text-xs hover:bg-gray-50 transition-all tracking-widest min-w-[140px]"
+                  className="w-full md:w-auto px-10 py-4 md:py-3 border-2 border-black font-bold uppercase text-xs hover:bg-gray-50 transition-all tracking-widest md:min-w-[140px] rounded-md"
                 >
                   {t("back")}
                 </button>
                 <button 
                   type="submit"
                   disabled={loading}
-                  className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] transition-all tracking-widest min-w-[200px] flex items-center justify-center shadow-lg"
+                  className="w-full md:w-auto px-10 py-4 md:py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] transition-all tracking-widest md:min-w-[200px] flex items-center justify-center shadow-lg rounded-md"
                 >
                   {loading && <Loader2 className="animate-spin mr-2" size={16} />}
                   {t("completeReg")}

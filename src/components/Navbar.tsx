@@ -59,7 +59,7 @@ export default function Navbar() {
                 alt="Barcode Gulf Solutions" 
                 width={150} 
                 height={50} 
-                className="h-10 w-auto object-contain"
+                className="h-8 md:h-10 w-auto object-contain"
                 priority
               />
             </Link>

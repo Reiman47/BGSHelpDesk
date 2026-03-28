@@ -251,11 +251,11 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
             <thead>
               <tr className="bg-gray-50 text-[10px] font-bold uppercase text-gray-400 tracking-[0.15em] border-b">
                 <th className="px-6 py-4">{t("status")}</th>
-                <th className="px-6 py-4">{t("requester")}</th>
-                <th className="px-6 py-4">{t("assignedTo")}</th>
+                <th className="px-6 py-4 hidden sm:table-cell">{t("requester")}</th>
+                <th className="px-6 py-4 hidden lg:table-cell">{t("assignedTo")}</th>
                 <th className="px-6 py-4">{t("ticketDetails")}</th>
-                <th className="px-6 py-4">{t("priority")}</th>
-                <th className="px-6 py-4">{t("created")}</th>
+                <th className="px-6 py-4 hidden md:table-cell">{t("priority")}</th>
+                <th className="px-6 py-4 hidden xl:table-cell">{t("created")}</th>
                 <th className={`px-6 py-4 ${lang === 'ar' ? 'text-left' : 'text-right'}`}>{t("actions")}</th>
               </tr>
             </thead>
@@ -271,7 +271,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
                       {t(ticket.status.toLowerCase())}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 hidden sm:table-cell">
                     <div className={`flex items-center ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : 'space-x-3'}`}>
                       <div className="w-9 h-9 bg-bgs-teal/10 rounded-full flex items-center justify-center text-bgs-teal shrink-0">
                         <User size={16} />
@@ -285,7 +285,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 hidden lg:table-cell">
                     {ticket.assignedTo ? (
                       <div className={`flex items-center ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : 'space-x-2'}`}>
                         <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-[8px] font-bold uppercase">
@@ -305,7 +305,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
                     </Link>
                     <div className="text-[10px] text-gray-400 uppercase tracking-widest">{ticket.category}</div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 hidden md:table-cell">
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
                       ticket.priority === 'URGENT' ? 'border-red-200 text-red-600 bg-red-50' :
                       ticket.priority === 'HIGH' ? 'border-orange-200 text-orange-600 bg-orange-50' :
@@ -314,7 +314,7 @@ export default function AdminTicketTable({ tickets: initialTickets, role }: Admi
                       {ticket.priority}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-xs text-gray-400">
+                  <td className="px-6 py-4 text-xs text-gray-400 hidden xl:table-cell">
                     {lang === 'ar'
                       ? formatDistance(new Date(ticket.createdAt), new Date(), { addSuffix: true }).replace('ago', 'مضت').replace('about', 'حوالي').replace('less than', 'أقل من').replace('minutes', 'دقائق').replace('hours', 'ساعات')
                       : formatDistance(new Date(ticket.createdAt), new Date(), { addSuffix: true })}

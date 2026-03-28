@@ -110,11 +110,11 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className={`min-h-screen bg-[#F0F2F5] font-montserrat flex flex-col items-center text-[#111111] ${isRTL ? "rtl" : "ltr"}`}>
-      <header className={`w-full bg-white p-6 px-10 flex justify-between items-center shadow-sm border-b border-gray-100 ${isRTL ? "flex-row-reverse" : ""}`}>
+      <header className={`w-full bg-white p-4 md:p-6 px-6 md:px-10 flex flex-col md:flex-row justify-between items-center shadow-sm border-b border-gray-100 gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
         <Link href="/" className="hover:opacity-80 transition-opacity">
-          <Image src="/logo.jpg" alt="Barcode Gulf" width={180} height={60} className="h-10 w-auto object-contain" priority />
+          <Image src="/logo.jpg" alt="Barcode Gulf" width={180} height={60} className="h-8 md:h-10 w-auto object-contain" priority />
         </Link>
-        <div className={`text-[10px] italic text-gray-400 hidden md:block ${isRTL ? "text-right" : "text-left"}`}>
+        <div className={`text-[10px] italic text-gray-400 ${isRTL ? "text-right" : "text-left"}`}>
           <button onClick={() => setLang(lang === "en" ? "ar" : "en")} className="hover:text-[#1AA1C5] transition-colors uppercase tracking-tighter decoration-dotted underline underline-offset-4">
             {lang === "en" ? "العربية" : "English"}
           </button>
@@ -163,9 +163,9 @@ export default function ForgotPasswordPage() {
                 />
               </div>
 
-              <div className={`flex gap-4 pt-6 mt-10 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <button type="button" onClick={() => router.push("/auth/login")} className="px-10 py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px]">{t("cancel")}</button>
-                <button type="submit" disabled={loading} className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[160px] flex items-center justify-center shadow-lg disabled:opacity-60">
+              <div className={`flex flex-col sm:flex-row gap-4 pt-6 mt-10 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
+                <button type="button" onClick={() => router.push("/auth/login")} className="w-full sm:w-auto px-10 py-4 sm:py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px] rounded-md">{t("cancel")}</button>
+                <button type="submit" disabled={loading} className="w-full sm:w-auto px-10 py-4 sm:py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[160px] flex items-center justify-center shadow-lg disabled:opacity-60 rounded-md">
                   {loading ? <Loader2 className="animate-spin mr-2" size={16} /> : t("submit")}
                 </button>
               </div>
@@ -201,9 +201,9 @@ export default function ForgotPasswordPage() {
                 </p>
               </div>
 
-              <div className={`flex gap-4 pt-6 mt-10 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <button type="button" onClick={() => { setStep("email"); setErrorMsg(""); setOtp(""); setOtpVerified(false); }} className="px-10 py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px]">{t("back")}</button>
-                <button type="submit" disabled={loading || otp.length < 6} className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[160px] flex items-center justify-center shadow-lg disabled:opacity-60">
+              <div className={`flex flex-col sm:flex-row gap-4 pt-6 mt-10 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
+                <button type="button" onClick={() => { setStep("email"); setErrorMsg(""); setOtp(""); setOtpVerified(false); }} className="w-full sm:w-auto px-10 py-4 sm:py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px] rounded-md">{t("back")}</button>
+                <button type="submit" disabled={loading || otp.length < 6} className="w-full sm:w-auto px-10 py-4 sm:py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[160px] flex items-center justify-center shadow-lg disabled:opacity-60 rounded-md">
                   {loading ? <Loader2 className="animate-spin mr-2" size={16} /> : t("next")}
                 </button>
               </div>
@@ -239,9 +239,9 @@ export default function ForgotPasswordPage() {
                 />
               </div>
 
-              <div className={`flex gap-4 pt-6 mt-10 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <button type="button" onClick={() => { setStep("otp"); setErrorMsg(""); }} className="px-10 py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px]">{t("back")}</button>
-                <button type="submit" disabled={loading} className="px-10 py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[200px] flex items-center justify-center shadow-lg disabled:opacity-60">
+              <div className={`flex flex-col sm:flex-row gap-4 pt-6 mt-10 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
+                <button type="button" onClick={() => { setStep("otp"); setErrorMsg(""); }} className="w-full sm:w-auto px-10 py-4 sm:py-3 border-2 border-[#222222] font-bold uppercase text-xs hover:bg-gray-50 tracking-widest min-w-[140px] rounded-md">{t("back")}</button>
+                <button type="submit" disabled={loading} className="w-full sm:w-auto px-10 py-4 sm:py-3 bg-[#1AA1C5] text-white font-bold uppercase text-xs hover:bg-[#1589a8] tracking-widest min-w-[200px] flex items-center justify-center shadow-lg disabled:opacity-60 rounded-md">
                   {loading ? <Loader2 className="animate-spin mr-2" size={16} /> : t("resetPassword")}
                 </button>
               </div>

@@ -86,8 +86,8 @@ export default function DashboardContent({ session, tickets, stats }: DashboardC
                 <tr className="bg-gray-50 text-[10px] font-bold uppercase text-gray-400 tracking-widest border-b">
                   <th className="px-6 py-4">{t("status")}</th>
                   <th className="px-6 py-4">{t("ticketInfo")}</th>
-                  <th className="px-6 py-4">{t("priority")}</th>
-                  <th className="px-6 py-4">{t("lastUpdated")}</th>
+                  <th className="px-6 py-4 hidden sm:table-cell">{t("priority")}</th>
+                  <th className="px-6 py-4 hidden md:table-cell">{t("lastUpdated")}</th>
                   <th className={`px-6 py-4 ${lang === 'ar' ? 'text-left' : 'text-right'}`}>{t("actions")}</th>
                 </tr>
               </thead>
@@ -111,7 +111,7 @@ export default function DashboardContent({ session, tickets, stats }: DashboardC
                       </Link>
                       <div className="text-[10px] text-gray-400 uppercase tracking-widest">{ticket.category}</div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 hidden sm:table-cell">
                       <span className={`flex items-center text-xs font-semibold ${lang === 'ar' ? 'space-x-reverse' : ''} space-x-1 ${
                         ticket.priority === 'URGENT' ? 'text-red-600' :
                         ticket.priority === 'HIGH' ? 'text-orange-600' :
@@ -121,7 +121,7 @@ export default function DashboardContent({ session, tickets, stats }: DashboardC
                         <span>{ticket.priority}</span>
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
+                    <td className="px-6 py-4 text-sm text-gray-500 hidden md:table-cell">
                       {lang === 'ar' 
                         ? formatDistance(new Date(ticket.updatedAt), new Date(), { addSuffix: true }).replace('ago', 'مضت').replace('about', 'حوالي').replace('less than', 'أقل من').replace('minutes', 'دقائق').replace('hours', 'ساعات')
                         : formatDistance(new Date(ticket.updatedAt), new Date(), { addSuffix: true })}
