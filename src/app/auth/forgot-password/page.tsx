@@ -193,7 +193,7 @@ export default function ForgotPasswordPage() {
                   onChange={(e) => { setOtp(e.target.value.replace(/\D/g, "")); setErrorMsg(""); }}
                   className={`w-full p-3.5 border ${errorMsg ? "border-red-400 bg-red-50" : "border-gray-300"} rounded-md outline-none focus:ring-1 focus:ring-[#1AA1C5] text-sm tracking-[10px] text-center font-bold`}
                   maxLength={6}
-                  placeholder="000000"
+                  placeholder="------"
                   inputMode="numeric"
                 />
                 <p className={`text-xs text-gray-400 mt-2 ${isRTL ? "text-right" : "text-left"}`}>

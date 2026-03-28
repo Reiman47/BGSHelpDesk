@@ -283,7 +283,7 @@ export default function RegisterPage() {
                     className={`w-full p-2.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-[#1AA1C5] outline-none transition-all bg-white text-sm text-center font-bold tracking-widest`}
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    placeholder="123456"
+                    placeholder="------"
                   />
                 </div>
               </div>
