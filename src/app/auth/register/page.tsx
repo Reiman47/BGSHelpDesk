@@ -156,41 +156,41 @@ export default function RegisterPage() {
         </h1>
 
         {/* Zebra Stepper */}
-        <div className={`flex items-center justify-center mb-16 relative w-full max-w-4xl px-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+        <div className={`flex items-center justify-center mb-24 relative w-full max-w-4xl px-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
           <div className="flex items-center w-full justify-between relative capitalize">
             {/* Step 1 */}
             <div className="relative flex flex-col items-center z-10">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${step >= 1 ? (step > 1 ? 'bg-green-500 border-green-500' : 'bg-black border-black') : 'bg-white border-gray-300'} text-white font-bold text-sm transition-all`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${step >= 1 ? (step > 1 ? 'bg-green-500 border-green-500' : 'bg-black border-black') : 'bg-white border-gray-300'} text-white font-bold text-sm transition-all shadow-sm`}>
                 {step > 1 ? "✓" : "1"}
               </div>
-              <span className={`absolute -bottom-7 text-[10px] md:text-[11px] font-bold tracking-tight whitespace-nowrap ${step === 1 ? 'text-red-600' : 'text-gray-600'}`}>
-                {t("step1Step")} <span className="text-red-600">*</span>
+              <span className={`absolute -bottom-14 md:-bottom-7 text-[9px] md:text-[11px] font-bold tracking-tight text-center w-[70px] md:w-auto md:whitespace-nowrap ${step === 1 ? 'text-red-600' : 'text-gray-600'}`}>
+                {t("step1Step")}
               </span>
             </div>
 
             {/* Line 1-2 */}
-            <div className={`flex-grow h-[2px] mx-2 transition-all ${step > 1 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+            <div className={`flex-grow h-[2px] mx-1 transition-all ${step > 1 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
 
             {/* Step 2 */}
             <div className="relative flex flex-col items-center z-10">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${step >= 2 ? (step > 2 ? 'bg-green-500 border-green-500' : 'bg-black border-black') : 'bg-white border-gray-300'} text-white font-bold text-sm transition-all`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${step >= 2 ? (step > 2 ? 'bg-green-500 border-green-500' : 'bg-black border-black') : 'bg-white border-gray-300'} text-white font-bold text-sm transition-all shadow-sm`}>
                 {step > 2 ? "✓" : "2"}
               </div>
-              <span className={`absolute -bottom-7 text-[10px] md:text-[11px] font-bold tracking-tight whitespace-nowrap ${step === 2 ? 'text-red-600' : 'text-gray-600'}`}>
-                {t("step2Step")} <span className="text-red-600">*</span>
+              <span className={`absolute -bottom-14 md:-bottom-7 text-[9px] md:text-[11px] font-bold tracking-tight text-center w-[70px] md:w-auto md:whitespace-nowrap ${step === 2 ? 'text-red-600' : 'text-gray-600'}`}>
+                {t("step2Step")}
               </span>
             </div>
 
             {/* Line 2-3 */}
-            <div className={`flex-grow h-[2px] mx-2 transition-all ${step > 2 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+            <div className={`flex-grow h-[2px] mx-1 transition-all ${step > 2 ? 'bg-green-500' : 'bg-gray-300'}`}></div>
 
             {/* Step 3 */}
             <div className="relative flex flex-col items-center z-10">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${step >= 3 ? 'bg-black border-black' : 'bg-white border-gray-300'} text-white font-bold text-sm transition-all`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${step >= 3 ? 'bg-black border-black' : 'bg-white border-gray-300'} text-white font-bold text-sm transition-all shadow-sm`}>
                 3
               </div>
-              <span className={`absolute -bottom-7 text-[10px] md:text-[11px] font-bold tracking-tight whitespace-nowrap ${step === 3 ? 'text-red-600' : 'text-gray-600'}`}>
-                {t("step3Step")} <span className="text-red-600">*</span>
+              <span className={`absolute -bottom-14 md:-bottom-7 text-[9px] md:text-[11px] font-bold tracking-tight text-center w-[70px] md:w-auto md:whitespace-nowrap ${step === 3 ? 'text-red-600' : 'text-gray-600'}`}>
+                {t("step3Step")}
               </span>
             </div>
           </div>
