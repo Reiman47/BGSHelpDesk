@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         where: { email },
         data: { attempts: newAttempts }
       });
-      return NextResponse.json({ message: `Invalid OTP. ${5 - newAttempts} attempts remaining.` }, { status: 400 });
+      return NextResponse.json({ message: "Invalid OTP" }, { status: 400 });
     }
 
     if (new Date() > registrationOtp.expiry) {

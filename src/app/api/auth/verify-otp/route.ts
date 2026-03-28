@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         newAttempts,
         email
       );
-      return NextResponse.json({ message: `Invalid OTP. ${5 - newAttempts} attempts remaining.` }, { status: 401 });
+      return NextResponse.json({ message: "Invalid OTP" }, { status: 401 });
     }
 
     // Verify Expiry
