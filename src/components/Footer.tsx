@@ -67,11 +67,11 @@ export default function Footer() {
             <ul className="space-y-3 text-xs">
               <li className={`flex items-center ${lang === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                 <MapPin className="text-bgs-teal shrink-0" size={14} />
-                <span>Al Malaz, Riyadh, KSA</span>
+                <span>{t("addressValue")}</span>
               </li>
               <li className={`flex items-center ${lang === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                 <Phone className="text-bgs-teal shrink-0" size={14} />
-                <span dir="ltr">+966 11 213 1355</span>
+                <span dir="ltr">{t("phoneValue")}</span>
               </li>
               <li className={`flex items-center ${lang === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                 <Mail className="text-bgs-teal shrink-0" size={14} />

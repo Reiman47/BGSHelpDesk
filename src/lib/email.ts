@@ -29,7 +29,7 @@ export const sendTicketEmail = async (to: string, subject: string, body: string)
           </div>
           <div style="background-color: #f8f9fa; padding: 25px; text-align: center; font-size: 11px; color: #777; border-top: 1px solid #eee;">
             <p style="margin-bottom: 5px;"><strong>Barcode Gulf Solutions</strong></p>
-            <p style="margin-bottom: 15px;">Al Malaz, Riyadh, KSA | +966 11 213 1355</p>
+            <p style="margin-bottom: 15px;">Office 102, Building 4, Dubai Internet City, Dubai, UAE | +971 4 346 2244</p>
             <p style="margin-bottom: 0;">This is an automated system notification. Please do not reply directly to this email.</p>
             <p style="margin-top: 5px;">&copy; 2026 Barcode Gulf Solutions. All rights reserved.</p>
           </div>
