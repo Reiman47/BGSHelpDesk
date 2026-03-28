@@ -39,6 +39,7 @@ export async function POST(req: Request) {
       data: {
         resetOtp: otp,
         resetOtpExpiry: expiry,
+        resetOtpAttempts: 0,
       },
     });
 

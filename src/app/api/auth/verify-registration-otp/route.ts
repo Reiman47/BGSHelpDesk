@@ -17,16 +17,30 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "No OTP found for this email" }, { status: 404 });
     }
 
+    if (registrationOtp.attempts >= 5) {
+      await prisma.registrationOtp.delete({ where: { email } });
+      return NextResponse.json({ message: "OTP expired due to too many failed attempts" }, { status: 400 });
+    }
+
     if (registrationOtp.otp !== otp) {
-      return NextResponse.json({ message: "Invalid OTP" }, { status: 400 });
+      const newAttempts = registrationOtp.attempts + 1;
+      if (newAttempts >= 5) {
+        await prisma.registrationOtp.delete({ where: { email } });
+        return NextResponse.json({ message: "OTP expired due to too many failed attempts" }, { status: 400 });
+      }
+      
+      await prisma.registrationOtp.update({
+        where: { email },
+        data: { attempts: newAttempts }
+      });
+      return NextResponse.json({ message: `Invalid OTP. ${5 - newAttempts} attempts remaining.` }, { status: 400 });
     }
 
     if (new Date() > registrationOtp.expiry) {
+      await prisma.registrationOtp.delete({ where: { email } });
       return NextResponse.json({ message: "OTP has expired" }, { status: 400 });
     }
 
-    // Optionally: delete the OTP record here, or leave it until the user is actually created?
-    // Let's delete it so it can't be reused.
     await prisma.registrationOtp.delete({
       where: { email },
     });

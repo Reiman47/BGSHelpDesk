@@ -24,6 +24,7 @@ model User {
   contactNumber String?
   resetOtp      String?
   resetOtpExpiry DateTime?
+  resetOtpAttempts Int @default(0)
 
   tickets       Ticket[]  @relation("CreatedTickets")
   assignedTickets Ticket[] @relation("AssignedTickets")
@@ -105,5 +106,6 @@ model RegistrationOtp {
   email     String   @unique
   otp       String
   expiry    DateTime
+  attempts  Int @default(0)
   createdAt DateTime @default(now())
 }

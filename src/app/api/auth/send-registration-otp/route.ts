@@ -37,11 +37,13 @@ export async function POST(req: Request) {
       update: {
         otp,
         expiry,
+        attempts: 0,
       },
       create: {
         email,
         otp,
         expiry,
+        attempts: 0,
       },
     });
 
