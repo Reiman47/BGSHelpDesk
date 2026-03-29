@@ -35,7 +35,7 @@ export async function GET(req: Request) {
       const adminId = ticket.assignedId as string;
       const adminName = ticket.assignedTo?.name || "Unknown Admin";
       const customer = ticket.createdBy?.companyName || "Unknown Customer";
-      const model = ticket.partNumber || ticket.category || "General";
+      const model = ticket.category === "RMA" ? "RMA" : (ticket.partNumber || ticket.category || "General");
       
       const resolutionTimeMs = ticket.updatedAt.getTime() - ticket.createdAt.getTime();
       const resolutionTimeHours = resolutionTimeMs / (1000 * 60 * 60);

@@ -54,10 +54,166 @@ export default function TicketDetailContent({ ticket, isAdmin, isSuperAdmin }: T
                   <div className="uppercase tracking-widest text-[10px] font-bold">{ticket.category}</div>
                 </div>
               </div>
-              <div className="p-8 leading-relaxed text-gray-700 whitespace-pre-wrap">
-                {ticket.description}
-              </div>
+              {ticket.category !== "RMA" && (
+                <div className="p-8 leading-relaxed text-gray-700 whitespace-pre-wrap">
+                  {ticket.description}
+                </div>
+              )}
+
+              {/* Shipping Details Side-by-Side (Visible to everyone for RMA) */}
+              {ticket.category === "RMA" && ticket.partNumber && (() => {
+                  try {
+                    const data = JSON.parse(ticket.partNumber);
+                    const { contact, address } = data;
+                    if (!contact && !address) return null;
+
+                    return (
+                      <div className="px-8 pb-8 pt-0">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-inner">
+                          {/* Shipping Contact Column */}
+                          <div className={`space-y-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                            <h4 className="font-bold text-bgs-navy uppercase tracking-widest text-[10px] flex items-center gap-2 border-b border-gray-200 pb-2 mb-4">
+                              <span className="p-1 bg-blue-100 text-blue-600 rounded">
+                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                              </span>
+                              {lang === 'ar' ? "جهة الاتصال للشحن" : "Shipping Contact"}
+                            </h4>
+                            {contact ? (
+                              <>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Name</span>
+                                  <p className="text-sm font-bold text-gray-800">{contact.firstName} {contact.lastName}</p>
+                                </div>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Email</span>
+                                  <p className="text-sm text-gray-600 font-medium truncate">{contact.email}</p>
+                                </div>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Phone</span>
+                                  <p className="text-sm text-gray-600 font-medium">{contact.workPhone || contact.mobilePhone || "-"}</p>
+                                </div>
+                                {contact.companyName && (
+                                  <div>
+                                    <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Company</span>
+                                    <p className="text-sm text-gray-600 font-medium">{contact.companyName}</p>
+                                  </div>
+                                )}
+                              </>
+                            ) : <p className="text-xs text-gray-400 italic">No contact info provided</p>}
+                          </div>
+
+                          {/* Shipping Address Column */}
+                          <div className={`space-y-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                            <h4 className="font-bold text-bgs-navy uppercase tracking-widest text-[10px] flex items-center gap-2 border-b border-gray-200 pb-2 mb-4">
+                              <span className="p-1 bg-green-100 text-green-600 rounded">
+                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                              </span>
+                              {lang === 'ar' ? "عنوان الشحن" : "Shipping Address"}
+                            </h4>
+                            {address ? (
+                              <>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Location</span>
+                                  <p className="text-sm font-bold text-gray-800">{address.companyName || "-"}</p>
+                                </div>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Street Address</span>
+                                  <p className="text-sm text-gray-600 font-medium">{address.address}</p>
+                                  {address.address2 && <p className="text-sm text-gray-600 font-medium">{address.address2}</p>}
+                                </div>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">City / State</span>
+                                  <p className="text-sm text-gray-600 font-medium">{address.city}, {address.state || address.province || "-"} {address.postalCode}</p>
+                                </div>
+                                <div>
+                                  <span className="text-gray-400 font-bold uppercase text-[9px] tracking-tight block">Country</span>
+                                  <p className="text-sm text-gray-600 font-medium">{address.country}</p>
+                                </div>
+                              </>
+                            ) : <p className="text-xs text-gray-400 italic">No address info provided</p>}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  } catch (e) { return null; }
+              })()}
             </div>
+
+            {/* RMA Items Table (Visible to everyone for RMA category) */}
+            {ticket.category === "RMA" && (() => {
+               try {
+                 if (!ticket.serialNumber) {
+                   return isAdmin || isSuperAdmin ? (
+                     <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl text-xs text-blue-700 italic">
+                       Note: This RMA was created before the structured table update. Item details are available in the main description thread above.
+                     </div>
+                   ) : null;
+                 }
+                 const items = JSON.parse(ticket.serialNumber);
+                 if (!Array.isArray(items) || items.length === 0) return null;
+
+                 const downloadCsv = () => {
+                   const headers = ["#", "Serial Number", "Product Name", "Problem Description"];
+                   const rows = items.map((it: any, idx: number) => [
+                     idx + 1,
+                     `"${it.serialNumber || ''}"`,
+                     `"${it.productName || ''}"`,
+                     `"${it.problemDescription || ''}"`
+                   ]);
+                   const csv = [headers, ...rows].map(r => r.join(",")).join("\n");
+                   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                   const url = URL.createObjectURL(blob);
+                   const link = document.createElement("a");
+                   link.href = url;
+                   link.setAttribute("download", `RMA_Items_${ticket.id.slice(0, 8)}.csv`);
+                   document.body.appendChild(link);
+                   link.click();
+                   document.body.removeChild(link);
+                 };
+
+                 return (
+                   <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                     <div className="bg-gray-50 border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+                       <h3 className="font-bold text-bgs-navy uppercase tracking-widest text-xs flex items-center gap-2">
+                         <span className="w-2 h-2 bg-bgs-teal rounded-full animate-pulse"></span>
+                         RMA Items List ({items.length})
+                       </h3>
+                       {(isAdmin || isSuperAdmin) && (
+                         <button 
+                           onClick={downloadCsv}
+                           className="bg-green-600 hover:bg-green-700 text-white text-[10px] font-bold px-4 py-1.5 rounded uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm"
+                         >
+                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                           Export to Excel
+                         </button>
+                       )}
+                     </div>
+                     <div className="overflow-x-auto">
+                       <table className="w-full text-xs text-left border-collapse">
+                         <thead className="bg-[#1B365D] text-white uppercase text-[9px] tracking-widest">
+                           <tr>
+                             <th className="px-4 py-3 font-bold border-r border-[#2a4a75] w-12 text-center">#</th>
+                             <th className="px-6 py-3 font-bold border-r border-[#2a4a75]">Serial Number</th>
+                             <th className="px-6 py-3 font-bold border-r border-[#2a4a75]">Product Name</th>
+                             <th className="px-6 py-3 font-bold">Problem Description</th>
+                           </tr>
+                         </thead>
+                         <tbody className="divide-y divide-gray-50">
+                           {items.map((item: any, i: number) => (
+                             <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+                               <td className="px-4 py-3 text-center text-gray-400 font-mono border-r border-gray-50">{i + 1}</td>
+                               <td className="px-6 py-3 font-bold text-bgs-navy border-r border-gray-50">{item.serialNumber || "-"}</td>
+                               <td className="px-6 py-3 text-gray-600 border-r border-gray-50 italic">{item.productName || "-"}</td>
+                               <td className="px-6 py-3 text-gray-500 font-medium">{item.problemDescription || "-"}</td>
+                             </tr>
+                           ))}
+                         </tbody>
+                       </table>
+                     </div>
+                   </div>
+                 );
+               } catch(e) { return null; }
+            })()}
 
             {/* Replies */}
             <div className="space-y-6">
@@ -111,13 +267,13 @@ export default function TicketDetailContent({ ticket, isAdmin, isSuperAdmin }: T
                     ticket.priority === 'HIGH' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'
                   }`}>{ticket.priority}</span>
                 </li>
-                {ticket.partNumber && (
+                {ticket.partNumber && ticket.category !== "RMA" && (
                   <li className={`flex justify-between ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                     <span className="text-gray-400 font-bold uppercase text-[10px] tracking-widest">{lang === 'ar' ? "رقم القطعة:" : "Part No:"}</span>
                     <span className="font-semibold text-bgs-navy">{ticket.partNumber}</span>
                   </li>
                 )}
-                {ticket.serialNumber && (
+                {ticket.serialNumber && ticket.category !== "RMA" && (
                   <li className={`flex justify-between ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                     <span className="text-gray-400 font-bold uppercase text-[10px] tracking-widest">{lang === 'ar' ? "الرقم التسلسلي:" : "Serial No:"}</span>
                     <span className="font-semibold text-bgs-navy">{ticket.serialNumber}</span>
@@ -156,10 +312,6 @@ export default function TicketDetailContent({ ticket, isAdmin, isSuperAdmin }: T
                     <p className="font-medium text-gray-700">{ticket.createdBy.name}</p>
                     <p className="text-gray-500 text-xs">{ticket.createdBy.email}</p>
                     <p className="text-gray-500 text-xs">{ticket.createdBy.contactNumber}</p>
-                  </div>
-                  <div>
-                    <span className="text-gray-400 font-bold uppercase text-[10px] tracking-widest block mb-1">{lang === 'ar' ? "العنوان" : "Address"}</span>
-                    <p className="text-gray-500 text-xs leading-relaxed">{ticket.createdBy.address || (lang === 'ar' ? 'لا يوجد عنوان' : 'No address provided')}</p>
                   </div>
                 </div>
               </div>
