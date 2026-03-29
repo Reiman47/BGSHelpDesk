@@ -45,6 +45,7 @@ export default function Navbar() {
 
   return (
     <nav
+      dir="ltr"
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled ? "bg-[#222222]/95 shadow-md py-1.5" : "bg-[#222222] py-2.5"
       }`}
@@ -91,9 +92,9 @@ export default function Navbar() {
           </div>
 
         {/* Right Side: Contact & Auth */}
-          <div className={`hidden md:flex items-center ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : 'space-x-6'}`}>
+          <div className="hidden md:flex items-center space-x-6">
             {/* Language Switcher */}
-            <div className={`flex items-center space-x-3 border-r border-[#444444] pr-4 ${lang === 'ar' ? 'border-r-0 border-l pl-4 pr-0 space-x-reverse' : ''}`}>
+            <div className="flex items-center space-x-3 border-r border-[#444444] pr-4">
               <button 
                 onClick={() => setLang('en')}
                 className={`text-[10px] font-bold transition-colors hover:text-bgs-teal ${lang === 'en' ? 'text-bgs-teal' : 'text-gray-400'}`}
@@ -110,8 +111,8 @@ export default function Navbar() {
             </div>
 
             {session ? (
-              <div className={`flex items-center space-x-4 ${lang === 'ar' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                <div className={`flex flex-col leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+              <div className="flex items-center space-x-4">
+                <div className="flex flex-col leading-tight text-left">
                   <span className="text-white text-[11px] font-bold truncate max-w-[130px]">{session.user?.name ?? '—'}</span>
                   <span className="text-gray-400 text-[10px] truncate max-w-[130px]">{session.user?.email ?? ''}</span>
                 </div>
@@ -124,20 +125,20 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <div className={`flex flex-col ${lang === 'ar' ? 'items-start ml-6' : 'items-end'}`}>
-                <a href="tel:+966112131355" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <Phone size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
-                  <span>+966 11 213 1355</span>
+              <div className="flex flex-col items-end">
+                <a href="tel:+97143462244" className="flex items-center text-xs text-white hover:text-bgs-teal transition-colors font-medium">
+                  <Phone size={14} className="mr-1.5 text-bgs-teal" />
+                  <span>+971 4 346 2244</span>
                 </a>
-                <a href="mailto:support@barcodegulf.net" className={`flex items-center text-xs text-white hover:text-bgs-teal transition-colors mt-1 font-medium ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <Mail size={14} className={`${lang === 'ar' ? 'ml-1.5' : 'mr-1.5'} text-bgs-teal`} />
+                <a href="mailto:support@barcodegulf.net" className="flex items-center text-xs text-white hover:text-bgs-teal transition-colors mt-1 font-medium">
+                  <Mail size={14} className="mr-1.5 text-bgs-teal" />
                   <span>support@barcodegulf.net</span>
                 </a>
               </div>
             )}
 
             {!session && (
-              <div className={`flex items-center border-[#444444] ${lang === 'ar' ? 'border-r pr-6 space-x-reverse space-x-3' : 'border-l pl-6 space-x-3'}`}>
+              <div className="flex items-center border-[#444444] border-l pl-6 space-x-3">
                 <Link 
                   href="/auth/login" 
                   className="mr-4 text-xs font-bold uppercase text-white hover:text-bgs-teal transition-colors"
