@@ -86,6 +86,28 @@ export default function CreateTicketPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // RMA Validation
+    if (isRMA) {
+      const filledRows = rmaRows.filter(r => r.serialNumber.trim() || r.productName.trim() || r.problemDescription.trim());
+      
+      if (!shippingContact || !shippingAddress) {
+        alert(lang === "ar" ? "يرجى إكمال تفاصيل الشحن والاتصال" : "Please complete shipping contact and address details");
+        return;
+      }
+
+      if (filledRows.length === 0) {
+        alert(lang === "ar" ? "يرجى إضافة عنصر واحد على الأقل في قائمة RMA" : "Please add at least one item to the RMA list");
+        return;
+      }
+
+      const hasInvalidRow = filledRows.some(r => !r.serialNumber.trim() || !r.problemDescription.trim());
+      if (hasInvalidRow) {
+        alert(lang === "ar" ? "الرقم التسلسلي ووصف المشكلة مطلوبان لكل عنصر مكتمل" : "Serial Number and Problem Description are required for each listed item");
+        return;
+      }
+    }
+
     setLoading(true);
     try {
       const payload = {
