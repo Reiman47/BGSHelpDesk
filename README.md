@@ -50,7 +50,7 @@ If you get a security error saying `npm.ps1 cannot be loaded because running scr
 
 ## Admin Credentials (Initial)
 
-- **Username:** `admin@barcodegulf.com`
+- **Username:** `shafeek@barcodegulf.net`
 - **Password:** `AdminTempPassword2026!`
 
 *Note: It is highly recommended to change this password after your first login.*

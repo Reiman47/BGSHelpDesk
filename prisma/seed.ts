@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminEmail = "admin@barcodegulf.com";
+  const adminEmail = "shafeek@barcodegulf.net";
   const existingAdmin = await prisma.user.findUnique({
     where: { email: adminEmail },
   });
@@ -20,7 +20,7 @@ async function main() {
       },
     });
     console.log("Admin user created successfully.");
-    console.log("Username/Email: admin@barcodegulf.com");
+    console.log("Username/Email: shafeek@barcodegulf.net");
     console.log("Password: AdminTempPassword2026!");
   } else {
     console.log("Admin user already exists.");

@@ -3,7 +3,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  const superAdminEmail = 'admin@barcodegulf.com';
+  const superAdminEmail = 'shafeek@barcodegulf.net';
   const hashedPassword = '$2b$10$gpxfFNGx3yWH6sNs/Yqk/OBdWmAHmVhf6jFV4WLTxyjTX/uCkhHaC';
 
   console.log(`Setting ${superAdminEmail} as SUPERADMIN...`);
